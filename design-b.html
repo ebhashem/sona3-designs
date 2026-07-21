@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صنع بحب — استوديو الحرفة | متجر منتجات يدوية سعودية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marhey:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#004956;
+    --teal-soft:#1d6a76;
+    --teal-tint:#e3eef0;
+    --blush:#f3cfc6;
+    --blush-deep:#e2a49a;
+    --sage:#adc2a4;
+    --sage-deep:#7d9a74;
+    --sage-tint:#eef3ea;
+    --terracotta:#cd7f5d;
+    --terracotta-deep:#b5654a;
+    --cream:#fdf8ef;
+    --cream-2:#faf1e2;
+    --paper:#fffdf8;
+    --ink:#223a3f;
+    --ink-soft:#5b6f72;
+    --gold:#dcae5f;
+    --shadow-soft:0 14px 34px -14px rgba(0,73,86,.22);
+    --shadow-float:0 24px 50px -20px rgba(0,73,86,.28);
+    --font-display:"Marhey", cursive;
+    --font-body:"IBM Plex Sans Arabic", sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.75;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{text-decoration:none;color:inherit}
+  ul{list-style:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+  /* ---------- painterly helpers ---------- */
+  .wrap{width:min(1160px,92%);margin-inline:auto;position:relative}
+  .display{font-family:var(--font-display);font-weight:600;line-height:1.5}
+  .section-eyebrow{
+    display:inline-flex;align-items:center;gap:.55rem;
+    font-size:.85rem;font-weight:600;color:var(--terracotta-deep);
+    background:#fff;padding:.35rem 1.1rem;border-radius:999px;
+    box-shadow:var(--shadow-soft);
+    border:1px dashed var(--blush-deep);
+  }
+  .section-eyebrow::before{content:"✿";color:var(--blush-deep);font-size:1rem}
+  .section-title{
+    font-family:var(--font-display);font-weight:600;
+    font-size:clamp(1.7rem,3.6vw,2.5rem);
+    color:var(--teal);margin:.9rem 0 .5rem;
+  }
+  .section-sub{color:var(--ink-soft);max-width:34rem;font-size:1rem}
+  .center{text-align:center}
+  .center .section-sub{margin-inline:auto}
+
+  /* hand-drawn underline squiggle */
+  .squiggle{position:relative;display:inline-block}
+  .squiggle::after{
+    content:"";position:absolute;right:0;left:0;bottom:-.28em;height:.5em;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M2 9 C 15 2, 28 13, 42 7 S 70 2, 84 8 S 108 12, 118 5' fill='none' stroke='%23cd7f5d' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+    opacity:.85;
+  }
+  .squiggle-blush::after{
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M2 9 C 15 2, 28 13, 42 7 S 70 2, 84 8 S 108 12, 118 5' fill='none' stroke='%23e2a49a' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+  }
+
+  /* washi tape */
+  .tape{
+    position:absolute;width:110px;height:32px;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.28) 0 6px, rgba(255,255,255,0) 6px 12px),
+      linear-gradient(rgba(226,164,154,.85), rgba(226,164,154,.85));
+    box-shadow:0 3px 8px rgba(0,73,86,.14);
+    opacity:.92;
+    border-radius:2px;
+    -webkit-mask:linear-gradient(90deg, transparent 0, #000 6px, #000 calc(100% - 6px), transparent 100%);
+            mask:linear-gradient(90deg, transparent 0, #000 6px, #000 calc(100% - 6px), transparent 100%);
+  }
+  .tape.sage{background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.28) 0 6px, rgba(255,255,255,0) 6px 12px),
+      linear-gradient(rgba(173,194,164,.9), rgba(173,194,164,.9));}
+  .tape.teal{background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 6px, rgba(255,255,255,0) 6px 12px),
+      linear-gradient(rgba(0,73,86,.72), rgba(0,73,86,.72));}
+  .tape.gold{background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.3) 0 6px, rgba(255,255,255,0) 6px 12px),
+      linear-gradient(rgba(220,174,95,.85), rgba(220,174,95,.85));}
+
+  /* organic blob */
+  .blob{
+    position:absolute;border-radius:58% 42% 55% 45% / 52% 58% 42% 48%;
+    filter:blur(2px);pointer-events:none;z-index:0;
+  }
+
+  /* wavy divider */
+  .wave{display:block;width:100%;height:70px;margin-top:-1px}
+  @media (max-width:640px){.wave{height:44px}}
+
+  /* scalloped edge (bottom) */
+  .scallop-bottom{
+    position:relative;
+  }
+  .scallop-bottom::after{
+    content:"";position:absolute;left:0;right:0;bottom:-14px;height:15px;
+    background:radial-gradient(circle at 50% 0, currentColor 14px, transparent 15px);
+    background-size:30px 15px;background-repeat:repeat-x;
+    pointer-events:none;
+  }
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(26px) rotate(var(--tilt,0deg));transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+  .reveal.in{opacity:1;transform:translateY(0) rotate(var(--tilt,0deg))}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+
+  /* ================= announcement ================= */
+  .announce{
+    background:var(--teal);color:#fef6ee;
+    font-size:.85rem;text-align:center;padding:.55rem 1rem;
+    letter-spacing:.02em;position:relative;z-index:40;
+  }
+  .announce b{color:var(--blush);font-weight:600}
+  .announce .heart{display:inline-block;animation:beat 2.2s ease-in-out infinite;margin-inline:.3rem}
+  @keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.25)}24%{transform:scale(1)}}
+
+  /* ================= nav ================= */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(253,248,239,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px dashed rgba(0,73,86,.22);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.85rem 0;gap:1rem;
+  }
+  .logo{display:flex;align-items:center;gap:.7rem}
+  .logo-mark{
+    width:52px;height:52px;flex:0 0 auto;
+    background:var(--teal);color:#fff;
+    border-radius:56% 44% 52% 48% / 50% 56% 44% 50%;
+    display:grid;place-items:center;font-size:1.45rem;
+    box-shadow:var(--shadow-soft);
+    position:relative;
+  }
+  .logo-mark::after{
+    content:"";position:absolute;inset:-5px;border:1.5px dashed var(--terracotta);
+    border-radius:inherit;opacity:.7;
+  }
+  .logo-name{font-family:var(--font-display);font-size:1.5rem;color:var(--teal);line-height:1.2}
+  .logo-tag{font-size:.68rem;color:var(--ink-soft);letter-spacing:.05em}
+  .nav-links{display:flex;gap:1.6rem;font-size:.95rem;font-weight:500}
+  .nav-links a{position:relative;padding:.2rem 0;color:var(--ink);transition:color .25s}
+  .nav-links a:hover{color:var(--terracotta-deep)}
+  .nav-links a::after{
+    content:"";position:absolute;right:0;bottom:-2px;height:6px;width:0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 8' preserveAspectRatio='none'%3E%3Cpath d='M1 5 C 10 1, 20 7, 30 4 S 50 1, 59 5' fill='none' stroke='%23e2a49a' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+    transition:width .3s ease;
+  }
+  .nav-links a:hover::after{width:100%}
+  .nav-actions{display:flex;align-items:center;gap:.5rem}
+  .icon-btn{
+    width:42px;height:42px;border-radius:50% 46% 52% 48%/48% 52% 46% 54%;
+    background:#fff;display:grid;place-items:center;font-size:1.05rem;
+    box-shadow:var(--shadow-soft);transition:transform .25s,background .25s;
+    position:relative;
+  }
+  .icon-btn:hover{transform:rotate(-6deg) scale(1.06);background:var(--blush)}
+  .cart-count{
+    position:absolute;top:-4px;left:-4px;background:var(--terracotta);color:#fff;
+    font-size:.62rem;width:18px;height:18px;border-radius:50%;
+    display:grid;place-items:center;font-weight:600;
+  }
+  .burger{display:none;flex-direction:column;gap:5px;padding:.5rem}
+  .burger span{width:24px;height:2.6px;background:var(--teal);border-radius:4px;transition:.3s}
+  .mobile-menu{
+    display:none;flex-direction:column;gap:.3rem;padding:1rem 0 1.4rem;
+    border-top:1px dashed rgba(0,73,86,.18);
+  }
+  .mobile-menu a{padding:.55rem .4rem;border-radius:12px;font-weight:500}
+  .mobile-menu a:hover{background:var(--blush)}
+  .mobile-menu.open{display:flex}
+
+  /* ================= hero ================= */
+  .hero{
+    position:relative;padding:3.4rem 0 4.5rem;overflow:hidden;
+    background:
+      radial-gradient(700px 420px at 88% -8%, rgba(243,207,198,.5), transparent 65%),
+      radial-gradient(620px 420px at 4% 100%, rgba(173,194,164,.42), transparent 65%),
+      var(--cream);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;
+    position:relative;z-index:2;
+  }
+  .hero-copy .kicker{
+    display:inline-flex;align-items:center;gap:.5rem;background:#fff;
+    border:1.5px dashed var(--sage-deep);color:var(--sage-deep);
+    padding:.35rem 1.1rem;border-radius:999px;font-size:.85rem;font-weight:600;
+    transform:rotate(1.5deg);box-shadow:var(--shadow-soft);
+  }
+  .hero-title{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(2.4rem,5.4vw,4rem);line-height:1.5;
+    color:var(--teal);margin:1.2rem 0 1rem;
+  }
+  .hero-title .pink{color:var(--terracotta)}
+  .hero-sub{color:var(--ink-soft);font-size:1.08rem;max-width:30rem;margin-bottom:1.8rem}
+  .hero-cta{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;gap:.55rem;
+    padding:.85rem 1.9rem;border-radius:999px;font-weight:600;font-size:1rem;
+    transition:transform .25s,box-shadow .25s,background .25s;
+  }
+  .btn-primary{
+    background:var(--teal);color:#fff;
+    box-shadow:0 16px 30px -12px rgba(0,73,86,.5);
+  }
+  .btn-primary:hover{transform:translateY(-3px) rotate(-1deg);background:var(--teal-soft)}
+  .btn-ghost{
+    background:#fff;color:var(--terracotta-deep);
+    border:1.5px dashed var(--terracotta);box-shadow:var(--shadow-soft);
+  }
+  .btn-ghost:hover{transform:translateY(-3px) rotate(1deg);background:var(--blush)}
+  .hero-trust{display:flex;gap:1.6rem;margin-top:2.2rem;flex-wrap:wrap}
+  .trust-item{display:flex;align-items:center;gap:.55rem;font-size:.85rem;color:var(--ink-soft)}
+  .trust-item .dot{
+    width:34px;height:34px;border-radius:52% 48% 55% 45%/50% 55% 45% 50%;
+    display:grid;place-items:center;font-size:.95rem;background:#fff;box-shadow:var(--shadow-soft);
+  }
+
+  /* scrapbook photo */
+  .hero-photo-area{position:relative;padding:1.5rem}
+  .polaroid{
+    position:relative;background:#fff;padding:14px 14px 3.2rem;
+    border-radius:14px;box-shadow:var(--shadow-float);
+    transform:rotate(-2.5deg);
+    transition:transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .polaroid:hover{transform:rotate(-1deg) translateY(-6px)}
+  .polaroid img{border-radius:8px;width:100%;height:340px;object-fit:cover;object-position:center}
+  .polaroid figcaption{
+    position:absolute;bottom:.9rem;right:0;left:0;text-align:center;
+    font-family:var(--font-display);color:var(--teal);font-size:1.05rem;
+  }
+  .polaroid .tape.t1{top:-14px;right:22%;transform:rotate(-8deg)}
+  .polaroid .tape.t2{bottom:-12px;left:14%;transform:rotate(6deg);width:90px}
+  .hero-sticker{
+    position:absolute;z-index:3;background:#fff;border-radius:50%;
+    box-shadow:var(--shadow-float);display:grid;place-items:center;text-align:center;
+  }
+  .sticker-badge{
+    width:118px;height:118px;left:-1.4rem;bottom:1.8rem;
+    background:var(--terracotta);color:#fff;
+    border-radius:55% 45% 50% 50%/48% 55% 45% 52%;
+    font-family:var(--font-display);font-size:.95rem;line-height:1.5;
+    padding:.6rem;transform:rotate(6deg);
+    animation:floaty 5s ease-in-out infinite;
+  }
+  .sticker-badge small{font-family:var(--font-body);font-size:.62rem;font-weight:500;opacity:.9}
+  .sticker-note{
+    width:auto;height:auto;padding:.55rem 1.1rem;border-radius:16px;
+    top:-.4rem;left:8%;transform:rotate(-5deg);
+    font-size:.8rem;font-weight:600;color:var(--sage-deep);
+    border:1.5px dashed var(--sage-deep);
+    animation:floaty 6s ease-in-out infinite reverse;
+  }
+  @keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -9px}}
+  .hero .blob.b1{width:340px;height:300px;background:rgba(243,207,198,.55);top:-90px;right:-120px}
+  .hero .blob.b2{width:260px;height:240px;background:rgba(173,194,164,.45);bottom:-70px;left:-90px}
+  .hero .blob.b3{width:120px;height:110px;background:rgba(220,174,95,.28);top:40%;left:44%}
+
+  /* floating doodles */
+  .doodle{position:absolute;font-size:1.4rem;opacity:.55;pointer-events:none;z-index:1}
+
+  /* ================= categories ================= */
+  .cats{padding:4.2rem 0 3.6rem;position:relative;background:var(--paper)}
+  .cats .blob.b1{width:300px;height:270px;background:rgba(227,238,240,.9);top:-40px;left:-110px}
+  .cat-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:1.1rem;margin-top:2.4rem;
+    position:relative;z-index:2;
+  }
+  .cat-card{
+    background:#fff;border-radius:22px;padding:1.5rem .8rem 1.2rem;text-align:center;
+    box-shadow:var(--shadow-soft);position:relative;
+    transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;
+    border:1px solid rgba(0,73,86,.06);
+  }
+  .cat-card:nth-child(odd){transform:rotate(-1.3deg)}
+  .cat-card:nth-child(even){transform:rotate(1.3deg)}
+  .cat-card:hover{transform:rotate(0) translateY(-8px);box-shadow:var(--shadow-float)}
+  .cat-blob{
+    width:74px;height:74px;margin:0 auto .8rem;display:grid;place-items:center;
+    font-size:2rem;border-radius:56% 44% 52% 48%/50% 56% 44% 50%;
+    transition:border-radius .5s ease, transform .4s ease;
+  }
+  .cat-card:hover .cat-blob{border-radius:48% 52% 44% 56%/56% 44% 52% 48%;transform:rotate(-8deg) scale(1.08)}
+  .cat-card:nth-child(1) .cat-blob{background:var(--blush)}
+  .cat-card:nth-child(2) .cat-blob{background:var(--sage-tint)}
+  .cat-card:nth-child(3) .cat-blob{background:var(--cream-2)}
+  .cat-card:nth-child(4) .cat-blob{background:var(--teal-tint)}
+  .cat-card:nth-child(5) .cat-blob{background:#f6e3cf}
+  .cat-card:nth-child(6) .cat-blob{background:#f9dede}
+  .cat-name{font-weight:600;font-size:.95rem;color:var(--teal)}
+  .cat-count{font-size:.72rem;color:var(--ink-soft)}
+
+  /* ================= products ================= */
+  .products{
+    padding:4.5rem 0 5rem;position:relative;
+    background:
+      radial-gradient(600px 400px at 100% 0%, rgba(173,194,164,.28), transparent 60%),
+      var(--cream-2);
+  }
+  .products-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .link-more{
+    font-weight:600;color:var(--teal);display:inline-flex;align-items:center;gap:.4rem;
+    border-bottom:2px dashed var(--terracotta);padding-bottom:.15rem;transition:gap .25s;
+  }
+  .link-more:hover{gap:.8rem;color:var(--terracotta-deep)}
+  .prod-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem;margin-top:2.6rem;
+  }
+  .prod-card{
+    background:#fff;border-radius:24px;overflow:visible;position:relative;
+    box-shadow:var(--shadow-soft);padding:12px 12px 1.3rem;
+    transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;
+  }
+  .prod-card:nth-child(1){--tilt:-1.4deg}
+  .prod-card:nth-child(2){--tilt:1.1deg}
+  .prod-card:nth-child(3){--tilt:-1deg}
+  .prod-card:nth-child(4){--tilt:1.5deg}
+  .prod-card{transform:rotate(var(--tilt))}
+  .prod-card:hover{transform:rotate(0) translateY(-9px);box-shadow:var(--shadow-float);z-index:3}
+  .prod-card .tape{width:84px;height:26px;top:-12px;right:50%;transform:translateX(50%) rotate(-4deg)}
+  .prod-media{
+    position:relative;height:190px;border-radius:16px;display:grid;place-items:center;
+    font-size:4.2rem;overflow:hidden;
+  }
+  .prod-media::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), transparent 55%);
+  }
+  .prod-card:nth-child(1) .prod-media{background:linear-gradient(150deg,#fbe4de,#f3cfc6)}
+  .prod-card:nth-child(2) .prod-media{background:linear-gradient(150deg,#e9f1e4,#c9d8c0)}
+  .prod-card:nth-child(3) .prod-media{background:linear-gradient(150deg,#f8ead6,#eccfa8)}
+  .prod-card:nth-child(4) .prod-media{background:linear-gradient(150deg,#dfecee,#bcd6da)}
+  .prod-emoji{transition:transform .4s ease;filter:drop-shadow(0 10px 12px rgba(0,73,86,.18))}
+  .prod-card:hover .prod-emoji{transform:scale(1.12) rotate(-6deg)}
+  .prod-flag{
+    position:absolute;top:.7rem;right:.7rem;z-index:2;
+    background:#fff;color:var(--terracotta-deep);font-size:.68rem;font-weight:700;
+    padding:.2rem .7rem;border-radius:999px;box-shadow:var(--shadow-soft);
+    transform:rotate(-3deg);
+  }
+  .prod-body{padding:1rem .5rem 0}
+  .prod-brand{
+    font-size:.72rem;color:var(--sage-deep);font-weight:600;
+    display:inline-flex;align-items:center;gap:.35rem;
+  }
+  .prod-brand::before{content:"❀";font-size:.8rem}
+  .prod-name{font-weight:600;font-size:1.02rem;color:var(--ink);margin:.25rem 0 .6rem;line-height:1.5}
+  .prod-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+  .price{font-family:var(--font-display);color:var(--teal);font-size:1.15rem}
+  .price small{font-family:var(--font-body);font-size:.72rem;color:var(--ink-soft);font-weight:500}
+  .price .old{font-size:.78rem;color:var(--blush-deep);text-decoration:line-through;margin-inline-start:.35rem;font-family:var(--font-body)}
+  .add-btn{
+    width:40px;height:40px;border-radius:52% 48% 55% 45%/50% 55% 45% 50%;
+    background:var(--teal);color:#fff;font-size:1.15rem;display:grid;place-items:center;
+    transition:transform .3s,background .3s;box-shadow:0 10px 18px -8px rgba(0,73,86,.5);
+  }
+  .add-btn:hover{transform:rotate(90deg) scale(1.1);background:var(--terracotta)}
+
+  /* ================= maker story ================= */
+  .story{
+    position:relative;padding:5rem 0;overflow:hidden;
+    background:var(--teal);color:#fdf6ee;
+  }
+  .story .blob.b1{width:420px;height:380px;background:rgba(243,207,198,.12);top:-120px;right:-140px;filter:blur(4px)}
+  .story .blob.b2{width:300px;height:280px;background:rgba(173,194,164,.14);bottom:-100px;left:-90px;filter:blur(4px)}
+  .story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:3.5rem;align-items:center;position:relative;z-index:2}
+  .story-collage{position:relative;min-height:380px}
+  .story-card{
+    position:absolute;background:#fff;border-radius:16px;padding:10px 10px 2.4rem;
+    box-shadow:0 24px 46px -18px rgba(0,0,0,.4);
+  }
+  .story-card .frame{
+    border-radius:10px;display:grid;place-items:center;font-size:3.4rem;
+  }
+  .story-card figcaption{
+    position:absolute;bottom:.55rem;right:0;left:0;text-align:center;
+    font-family:var(--font-display);font-size:.85rem;color:var(--teal);
+  }
+  .story-card.c1{width:56%;top:0;right:4%;transform:rotate(-4deg)}
+  .story-card.c1 .frame{height:180px;background:linear-gradient(150deg,#fbe4de,#eec3ba)}
+  .story-card.c2{width:48%;bottom:8%;right:38%;transform:rotate(5deg)}
+  .story-card.c2 .frame{height:150px;background:linear-gradient(150deg,#e9f1e4,#c3d4b9)}
+  .story-card.c3{width:40%;bottom:0;left:2%;top:auto;transform:rotate(-7deg)}
+  .story-card.c3 .frame{height:120px;background:linear-gradient(150deg,#f8ead6,#e8c795)}
+  .story-card .tape{top:-13px;right:30%;width:80px;height:26px;transform:rotate(-6deg)}
+  .story-eyebrow{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.1);color:var(--blush)}
+  .story-eyebrow::before{color:var(--blush)}
+  .story h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.6;margin:1rem 0;color:#fff}
+  .story h2 em{font-style:normal;color:var(--blush)}
+  .story p{color:rgba(253,246,238,.85);max-width:34rem;margin-bottom:1.1rem}
+  .story-stats{display:flex;gap:1rem;margin:1.8rem 0 2rem;flex-wrap:wrap}
+  .stat{
+    background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.35);
+    border-radius:20px;padding:.85rem 1.4rem;text-align:center;min-width:110px;
+    backdrop-filter:blur(4px);
+  }
+  .stat b{font-family:var(--font-display);font-size:1.5rem;display:block;color:var(--blush)}
+  .stat span{font-size:.75rem;color:rgba(253,246,238,.8)}
+  .btn-light{background:#fdf6ee;color:var(--teal);box-shadow:0 16px 30px -12px rgba(0,0,0,.4)}
+  .btn-light:hover{transform:translateY(-3px) rotate(-1deg);background:var(--blush)}
+
+  /* ================= brands ================= */
+  .brands{padding:4.6rem 0 4rem;background:var(--paper);position:relative}
+  .brand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:2.6rem}
+  .brand-card{
+    background:#fff;border-radius:26px;padding:2.2rem 1.6rem 1.8rem;text-align:center;
+    box-shadow:var(--shadow-soft);position:relative;
+    transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;
+    border:1px solid rgba(0,73,86,.05);
+  }
+  .brand-card:nth-child(1){transform:rotate(-1.2deg)}
+  .brand-card:nth-child(2){transform:rotate(.8deg) translateY(-10px)}
+  .brand-card:nth-child(3){transform:rotate(1.4deg)}
+  .brand-card:hover{transform:rotate(0) translateY(-10px);box-shadow:var(--shadow-float)}
+  .brand-card .tape{top:-13px;right:50%;transform:translateX(50%) rotate(-3deg);width:96px;height:28px}
+  .brand-logo{
+    width:112px;height:112px;margin:0 auto 1.1rem;background:var(--cream);
+    border-radius:54% 46% 50% 50%/48% 54% 46% 52%;
+    display:grid;place-items:center;overflow:hidden;
+    box-shadow:inset 0 0 0 6px #fff, var(--shadow-soft);
+    transition:border-radius .5s ease;
+  }
+  .brand-card:hover .brand-logo{border-radius:46% 54% 52% 48%/52% 46% 54% 48%}
+  .brand-logo img{width:82%;height:82%;object-fit:contain;border-radius:50%}
+  .brand-name{font-family:var(--font-display);font-size:1.3rem;color:var(--teal)}
+  .brand-desc{font-size:.85rem;color:var(--ink-soft);margin:.4rem 0 1.1rem}
+  .brand-link{
+    font-size:.85rem;font-weight:600;color:var(--terracotta-deep);
+    border-bottom:2px dashed var(--blush-deep);padding-bottom:.1rem;
+  }
+  .brand-link:hover{color:var(--teal)}
+
+  /* ================= gift corner ================= */
+  .gift{
+    position:relative;padding:4.6rem 0;overflow:hidden;
+    background:
+      radial-gradient(560px 400px at 0% 0%, rgba(243,207,198,.55), transparent 60%),
+      radial-gradient(560px 380px at 100% 100%, rgba(173,194,164,.45), transparent 60%),
+      var(--cream);
+  }
+  .gift-card{
+    position:relative;background:#fff;border-radius:34px;
+    padding:3rem clamp(1.5rem,5vw,4rem);
+    display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:center;
+    box-shadow:var(--shadow-float);overflow:hidden;
+  }
+  .gift-card::before{
+    content:"";position:absolute;inset:12px;border:1.8px dashed var(--blush-deep);
+    border-radius:26px;pointer-events:none;opacity:.6;
+  }
+  .gift-card .blob.b1{width:220px;height:200px;background:rgba(243,207,198,.5);top:-70px;left:-60px}
+  .gift-copy{position:relative;z-index:2}
+  .gift h2{font-family:var(--font-display);color:var(--teal);font-size:clamp(1.6rem,3.2vw,2.2rem);line-height:1.6;margin:.7rem 0 .6rem}
+  .gift p{color:var(--ink-soft);max-width:30rem;margin-bottom:1.5rem}
+  .gift-visual{
+    position:relative;z-index:2;width:200px;height:200px;
+    background:linear-gradient(150deg,#fbe4de,#f3cfc6);
+    border-radius:55% 45% 50% 50%/48% 55% 45% 52%;
+    display:grid;place-items:center;font-size:5rem;
+    box-shadow:var(--shadow-soft);
+    animation:floaty 5.5s ease-in-out infinite;
+  }
+  .gift-visual .mini{
+    position:absolute;font-size:1.6rem;background:#fff;width:56px;height:56px;
+    border-radius:52% 48% 55% 45%/50% 55% 45% 50%;display:grid;place-items:center;
+    box-shadow:var(--shadow-soft);
+  }
+  .gift-visual .m1{top:-12px;right:-16px;transform:rotate(10deg)}
+  .gift-visual .m2{bottom:-8px;left:-20px;transform:rotate(-8deg)}
+
+  /* ================= newsletter ================= */
+  .news{
+    position:relative;padding:0 0 5rem;background:var(--cream);
+  }
+  .news-card{
+    position:relative;background:var(--sage-tint);border-radius:36px;
+    padding:3.4rem clamp(1.4rem,5vw,4rem);text-align:center;overflow:hidden;
+    box-shadow:var(--shadow-soft);
+  }
+  .news-card .blob.b1{width:260px;height:230px;background:rgba(173,194,164,.5);top:-80px;right:-70px}
+  .news-card .blob.b2{width:220px;height:200px;background:rgba(243,207,198,.55);bottom:-70px;left:-60px}
+  .news-card .tape{top:-6px;right:8%;transform:rotate(-7deg)}
+  .news-card .tape.two{right:auto;left:8%;transform:rotate(6deg)}
+  .news h2{font-family:var(--font-display);color:var(--teal);font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.6;position:relative;z-index:2}
+  .news p{color:var(--ink-soft);margin:.6rem auto 1.8rem;max-width:32rem;position:relative;z-index:2}
+  .news-form{
+    display:flex;gap:.6rem;max-width:520px;margin:0 auto;position:relative;z-index:2;
+    background:#fff;padding:.45rem;border-radius:999px;box-shadow:var(--shadow-soft);
+  }
+  .news-form input{
+    flex:1;border:none;outline:none;background:transparent;
+    font-family:inherit;font-size:.95rem;padding:.6rem 1.2rem;color:var(--ink);
+    min-width:0;
+  }
+  .news-form input::placeholder{color:#a3b3b5}
+  .news-form button{
+    background:var(--terracotta);color:#fff;border-radius:999px;
+    padding:.7rem 1.7rem;font-weight:600;font-size:.95rem;
+    transition:background .3s,transform .3s;white-space:nowrap;
+  }
+  .news-form button:hover{background:var(--teal);transform:rotate(-1.5deg)}
+  .news-note{font-size:.75rem;color:var(--ink-soft);margin-top:.9rem;position:relative;z-index:2}
+  .news-done{
+    display:none;position:relative;z-index:2;
+    font-family:var(--font-display);color:var(--sage-deep);font-size:1.2rem;margin-top:.5rem;
+  }
+
+  /* ================= footer ================= */
+  footer{
+    background:var(--teal);color:rgba(253,246,238,.85);position:relative;
+  }
+  .footer-inner{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;
+    padding:4rem 0 2.5rem;
+  }
+  .f-logo{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+  .f-logo .logo-mark{background:#fdf6ee;color:var(--teal)}
+  .f-logo .logo-mark::after{border-color:var(--blush)}
+  .f-logo .logo-name{color:#fff}
+  .f-logo .logo-tag{color:rgba(253,246,238,.65)}
+  footer h4{
+    font-family:var(--font-display);color:var(--blush);font-size:1.05rem;
+    margin-bottom:1rem;font-weight:500;
+  }
+  footer ul li{margin-bottom:.55rem;font-size:.9rem}
+  footer ul a{transition:color .25s;position:relative}
+  footer ul a:hover{color:var(--blush)}
+  .f-about{font-size:.9rem;max-width:20rem;line-height:1.9}
+  .f-social{display:flex;gap:.6rem;margin-top:1.2rem}
+  .f-social a{
+    width:40px;height:40px;background:rgba(255,255,255,.1);
+    border:1px dashed rgba(255,255,255,.35);
+    border-radius:52% 48% 55% 45%/50% 55% 45% 50%;
+    display:grid;place-items:center;font-size:1rem;
+    transition:background .3s,transform .3s;
+  }
+  .f-social a:hover{background:var(--terracotta);transform:rotate(-8deg) scale(1.08)}
+  .f-pay{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+  .f-pay span{
+    background:rgba(255,255,255,.1);border-radius:10px;padding:.25rem .8rem;
+    font-size:.7rem;border:1px solid rgba(255,255,255,.14);
+  }
+  .footer-bar{
+    border-top:1px dashed rgba(255,255,255,.25);
+    padding:1.2rem 0;text-align:center;font-size:.8rem;color:rgba(253,246,238,.6);
+  }
+  .footer-bar b{color:var(--blush);font-weight:500}
+
+  /* ================= responsive ================= */
+  @media (max-width:1024px){
+    .cat-grid{grid-template-columns:repeat(3,1fr)}
+    .prod-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-inner{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:860px){
+    .nav-links{display:none}
+    .burger{display:flex}
+    .hero-grid{grid-template-columns:1fr;gap:2.4rem}
+    .hero-photo-area{max-width:520px;margin-inline:auto;width:100%}
+    .story-grid{grid-template-columns:1fr;gap:3rem}
+    .story-collage{min-height:330px;max-width:520px;margin-inline:auto;width:100%}
+    .gift-card{grid-template-columns:1fr;text-align:center}
+    .gift p{margin-inline:auto}
+    .gift-visual{margin:0 auto}
+    .brand-grid{grid-template-columns:1fr;max-width:420px;margin-inline:auto}
+    .brand-card:nth-child(2){transform:rotate(.8deg)}
+  }
+  @media (max-width:640px){
+    .cat-grid{grid-template-columns:repeat(2,1fr)}
+    .prod-grid{grid-template-columns:1fr;max-width:360px;margin-inline:auto}
+    .footer-inner{grid-template-columns:1fr;gap:2rem}
+    .polaroid img{height:250px}
+    .news-form{flex-direction:column;border-radius:24px;padding:.6rem}
+    .news-form button{width:100%;padding:.8rem}
+    .hero{padding-top:2.4rem}
+    .sticker-badge{width:100px;height:100px;font-size:.85rem;left:-.6rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== announcement ==================== -->
+<div class="announce">
+  <span class="heart">🧡</span>
+  شحن مجاني للطلبات فوق <b>٢٠٠ ر.س</b> — وكل قطعة تُغلَّف بيد صانعتها
+  <span class="heart">🧡</span>
+</div>
+
+<!-- ==================== nav ==================== -->
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="#" class="logo" aria-label="صنع بحب — الصفحة الرئيسية">
+        <span class="logo-mark">🧶</span>
+        <span>
+          <span class="logo-name">صنع بحب</span><br>
+          <span class="logo-tag">استوديو الحرفة السعودي</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="التنقل الرئيسي">
+        <a href="#cats">الأقسام</a>
+        <a href="#products">وصل حديثاً</a>
+        <a href="#story">حكايتنا</a>
+        <a href="#brands">متاجرنا</a>
+        <a href="#gift">ركن الهدايا</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" aria-label="البحث">🔍</button>
+        <button class="icon-btn" aria-label="المفضلة">🤍</button>
+        <button class="icon-btn" aria-label="سلة التسوق">🧺<span class="cart-count">٣</span></button>
+        <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="قائمة الجوال">
+      <a href="#cats">الأقسام</a>
+      <a href="#products">وصل حديثاً</a>
+      <a href="#story">حكايتنا</a>
+      <a href="#brands">متاجرنا</a>
+      <a href="#gift">ركن الهدايا</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== hero ==================== -->
+<section class="hero">
+  <span class="blob b1"></span>
+  <span class="blob b2"></span>
+  <span class="blob b3"></span>
+  <span class="doodle" style="top:14%;right:6%">✿</span>
+  <span class="doodle" style="bottom:18%;right:40%">❀</span>
+  <span class="doodle" style="top:20%;left:8%">✦</span>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <span class="kicker">🌿 صناعة يدوية ١٠٠٪ من قلب السعودية</span>
+        <h1 class="hero-title">
+          قطع تحكي حكاية،<br>
+          <span class="squiggle">صُنعت</span> <span class="pink">بحب</span> لأجلك
+        </h1>
+        <p class="hero-sub">
+          مجموعة من المنتجات التي صنعت بحب في السعودية — شموع تُسكب، خيوط تُحاك،
+          وطين يتشكّل بين أصابع صانعات موهوبات، ليصل إلى بيتك بكل دفء.
+        </p>
+        <div class="hero-cta">
+          <a href="#products" class="btn btn-primary">تسوّقي المجموعة ✨</a>
+          <a href="#story" class="btn btn-ghost">تعرّفي على الصانعات</a>
+        </div>
+        <div class="hero-trust">
+          <span class="trust-item"><span class="dot">🚚</span> شحن لكل مدن المملكة</span>
+          <span class="trust-item"><span class="dot">🎀</span> تغليف هدايا مجاني</span>
+          <span class="trust-item"><span class="dot">🌸</span> قطع محدودة ومميزة</span>
+        </div>
+      </div>
+      <div class="hero-photo-area reveal" style="--tilt:0deg">
+        <span class="hero-sticker sticker-note">جديد الموسم 🌷</span>
+        <figure class="polaroid">
+          <span class="tape t1 sage"></span>
+          <span class="tape t2"></span>
+          <img src="https://cdn.files.salla.network/homepage/1161127395/f8f80c0b-7046-4183-a952-f09a176a724b.webp"
+               alt="تشكيلة منتجات صنع بحب اليدوية" loading="eager">
+          <figcaption>من استوديو الحرفة، بكل حب 🧡</figcaption>
+        </figure>
+        <span class="hero-sticker sticker-badge">
+          خصم ١٥٪<br><small>على أول طلب لك</small>
+        </span>
+      </div>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;bottom:-1px;right:0;left:0">
+    <path d="M0,40 C120,70 260,8 420,30 C580,52 700,62 860,38 C1020,14 1140,58 1290,44 C1360,38 1410,28 1440,34 L1440,70 L0,70 Z" fill="#fffdf8"/>
+  </svg>
+</section>
+
+<!-- ==================== categories ==================== -->
+<section class="cats" id="cats">
+  <span class="blob b1"></span>
+  <div class="wrap center">
+    <span class="section-eyebrow">تسوّقي حسب الحرفة</span>
+    <h2 class="section-title">كل حرفة لها <span class="squiggle squiggle-blush">ركنها</span> الخاص</h2>
+    <p class="section-sub">من شمعة تضيء مساءك إلى سلة خوص تحمل ذكرياتك — اختاري الحرفة الأقرب لقلبك.</p>
+    <div class="cat-grid">
+      <a href="#" class="cat-card reveal">
+        <span class="cat-blob">🕯️</span>
+        <span class="cat-name">شموع وعطور</span><br>
+        <span class="cat-count">٤٨ منتجاً</span>
+      </a>
+      <a href="#" class="cat-card reveal">
+        <span class="cat-blob">🧶</span>
+        <span class="cat-name">كروشيه</span><br>
+        <span class="cat-count">٣٦ منتجاً</span>
+      </a>
+      <a href="#" class="cat-card reveal">
+        <span class="cat-blob">🏺</span>
+        <span class="cat-name">فخار وخزف</span><br>
+        <span class="cat-count">٢٩ منتجاً</span>
+      </a>
+      <a href="#" class="cat-card reveal">
+        <span class="cat-blob">🧺</span>
+        <span class="cat-name">خوص وسلال</span><br>
+        <span class="cat-count">٢٢ منتجاً</span>
+      </a>
+      <a href="#" class="cat-card reveal">
+        <span class="cat-blob">🎨</span>
+        <span class="cat-name">لوحات فنية</span><br>
+        <span class="cat-count">١٧ منتجاً</span>
+      </a>
+      <a href="#" class="cat-card reveal">
+        <span class="cat-blob">🎁</span>
+        <span class="cat-name">هدايا</span><br>
+        <span class="cat-count">٤١ منتجاً</span>
+      </a>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="margin-top:3rem;display:block;transform:translateY(1px)">
+    <path d="M0,30 C140,60 300,5 460,28 C620,51 760,60 920,32 C1080,6 1220,55 1440,30 L1440,70 L0,70 Z" fill="#faf1e2"/>
+  </svg>
+</section>
+
+<!-- ==================== products ==================== -->
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="products-head">
+      <div>
+        <span class="section-eyebrow">وصل حديثاً إلى الاستوديو</span>
+        <h2 class="section-title">قطع جديدة، ما زالت <span class="squiggle">دافئة</span> من أيدي صانعاتها</h2>
+      </div>
+      <a href="#" class="link-more">كل المنتجات ←</a>
+    </div>
+    <div class="prod-grid">
+      <article class="prod-card reveal">
+        <span class="tape gold"></span>
+        <div class="prod-media">
+          <span class="prod-flag">الأكثر مبيعاً</span>
+          <span class="prod-emoji">🕯️</span>
+        </div>
+        <div class="prod-body">
+          <span class="prod-brand">نور</span>
+          <h3 class="prod-name">شمعة «مساء الطائف» بعطر الورد والعنبر</h3>
+          <div class="prod-foot">
+            <span class="price">٨٩ <small>ر.س</small></span>
+            <button class="add-btn" aria-label="أضيفي الشمعة إلى السلة">+</button>
+          </div>
+        </div>
+      </article>
+      <article class="prod-card reveal">
+        <span class="tape sage"></span>
+        <div class="prod-media">
+          <span class="prod-flag">قطعة واحدة</span>
+          <span class="prod-emoji">🧶</span>
+        </div>
+        <div class="prod-body">
+          <span class="prod-brand">متجر سلمى</span>
+          <h3 class="prod-name">بطانية كروشيه «غيمة» بغرزة الصدفة</h3>
+          <div class="prod-foot">
+            <span class="price">٢٤٥ <small>ر.س</small></span>
+            <button class="add-btn" aria-label="أضيفي البطانية إلى السلة">+</button>
+          </div>
+        </div>
+      </article>
+      <article class="prod-card reveal">
+        <span class="tape"></span>
+        <div class="prod-media">
+          <span class="prod-flag">خصم ٢٠٪</span>
+          <span class="prod-emoji">🏺</span>
+        </div>
+        <div class="prod-body">
+          <span class="prod-brand">دولي</span>
+          <h3 class="prod-name">مزهرية خزف «صحراء» بتزجيج يدوي</h3>
+          <div class="prod-foot">
+            <span class="price">١٢٨ <small>ر.س</small><span class="old">١٦٠ ر.س</span></span>
+            <button class="add-btn" aria-label="أضيفي المزهرية إلى السلة">+</button>
+          </div>
+        </div>
+      </article>
+      <article class="prod-card reveal">
+        <span class="tape teal"></span>
+        <div class="prod-media">
+          <span class="prod-flag">جديد</span>
+          <span class="prod-emoji">🧺</span>
+        </div>
+        <div class="prod-body">
+          <span class="prod-brand">متجر سلمى</span>
+          <h3 class="prod-name">سلة خوص «الأحساء» بمقابض جلدية</h3>
+          <div class="prod-foot">
+            <span class="price">١٧٥ <small>ر.س</small></span>
+            <button class="add-btn" aria-label="أضيفي السلة إلى سلة التسوق">+</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== maker story ==================== -->
+<section class="story" id="story">
+  <span class="blob b1"></span>
+  <span class="blob b2"></span>
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-collage reveal">
+        <figure class="story-card c1">
+          <span class="tape"></span>
+          <div class="frame">🪡</div>
+          <figcaption>غرزة بغرزة…</figcaption>
+        </figure>
+        <figure class="story-card c2">
+          <span class="tape gold"></span>
+          <div class="frame">🫖</div>
+          <figcaption>جلسة الاستوديو</figcaption>
+        </figure>
+        <figure class="story-card c3">
+          <span class="tape sage"></span>
+          <div class="frame">🌾</div>
+          <figcaption>خوص الأحساء</figcaption>
+        </figure>
+      </div>
+      <div class="reveal">
+        <span class="section-eyebrow story-eyebrow">حكاية من الاستوديو</span>
+        <h2>خلف كل قطعة… <em>يدان</em> وقصة وقلب</h2>
+        <p>
+          «صنع بحب» بدأ من طاولة مطبخ صغيرة في الرياض، حيث كانت سلمى تحيك أول
+          بطانياتها بينما تسكب نور شموعها الأولى. اليوم، نجمع صانعات من مختلف
+          مناطق المملكة تحت سقف استوديو واحد.
+        </p>
+        <p>
+          كل قطعة تصلك موقّعة من صانعتها، ومعها بطاقة صغيرة تحكي قصتها —
+          لأننا نؤمن أن الأشياء الجميلة تستحق أن تُحكى.
+        </p>
+        <div class="story-stats">
+          <div class="stat"><b>+٢٤</b><span>صانعة سعودية</span></div>
+          <div class="stat"><b>+١٩٠</b><span>قطعة يدوية</span></div>
+          <div class="stat"><b>+٣٢٠٠</b><span>بيت وصلته قطعنا</span></div>
+        </div>
+        <a href="#brands" class="btn btn-light">اكتشفي متاجر الصانعات 🌷</a>
+      </div>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;bottom:-1px;right:0;left:0">
+    <path d="M0,42 C130,10 290,64 450,40 C610,16 750,8 910,36 C1070,64 1230,18 1440,42 L1440,70 L0,70 Z" fill="#fffdf8"/>
+  </svg>
+</section>
+
+<!-- ==================== brands ==================== -->
+<section class="brands" id="brands">
+  <div class="wrap center">
+    <span class="section-eyebrow">عائلة صنع بحب</span>
+    <h2 class="section-title">ثلاثة متاجر… <span class="squiggle squiggle-blush">قلب</span> واحد</h2>
+    <p class="section-sub">كل متجر في عائلتنا له بصمته الخاصة، ويجمعها شغف واحد بالصناعة اليدوية.</p>
+    <div class="brand-grid">
+      <article class="brand-card reveal">
+        <span class="tape"></span>
+        <div class="brand-logo">
+          <img src="https://cdn.files.salla.network/brands/1161127395/7cb2db59-859a-45fa-9ef9-666d85cada9b_900x900.webp" alt="شعار متجر سلمى" loading="lazy">
+        </div>
+        <h3 class="brand-name">متجر سلمى</h3>
+        <p class="brand-desc">كروشيه وخوص وسلال — خيوط قطنية تتحول إلى قطع تعيش معك سنوات.</p>
+        <a href="#" class="brand-link">زوري المتجر ←</a>
+      </article>
+      <article class="brand-card reveal">
+        <span class="tape sage"></span>
+        <div class="brand-logo">
+          <img src="https://cdn.salla.sa/RABaNP/PELESVNJk0Vbdv2AlMI6YMh174CjTr1QBondyjL2.png" alt="شعار دولي" loading="lazy">
+        </div>
+        <h3 class="brand-name">دولي</h3>
+        <p class="brand-desc">فخار وخزف ولوحات فنية — طين وألوان تتشكل بروح عصرية ولمسة تراثية.</p>
+        <a href="#" class="brand-link">زوري المتجر ←</a>
+      </article>
+      <article class="brand-card reveal">
+        <span class="tape gold"></span>
+        <div class="brand-logo">
+          <img src="https://cdn.salla.sa/RABaNP/brands/2BsviGrAGVzhU1ygjTM9srAypnjAzMrAReDv0Fua.png" alt="شعار نور" loading="lazy">
+        </div>
+        <h3 class="brand-name">نور</h3>
+        <p class="brand-desc">شموع وعطور منزلية — روائح مستوحاة من مدن المملكة، تُسكب يدوياً بحب.</p>
+        <a href="#" class="brand-link">زوري المتجر ←</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== gift corner ==================== -->
+<section class="gift" id="gift">
+  <div class="wrap">
+    <div class="gift-card reveal">
+      <span class="blob b1"></span>
+      <div class="gift-copy">
+        <span class="section-eyebrow">ركن الهدايا 🎀</span>
+        <h2>هدية تُفتح مرتين: مرة بالعين… ومرة بالقلب</h2>
+        <p>
+          اختاري القطع، ونحن نغلّفها في صندوقنا المميز بورق حريري وشريط قماشي
+          وبطاقة إهداء بخط اليد — جاهزة لتُهدى مباشرة.
+        </p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary">جهّزي هديتك 🎁</a>
+          <a href="#" class="btn btn-ghost">بطاقات إهداء رقمية</a>
+        </div>
+      </div>
+      <div class="gift-visual">
+        🎁
+        <span class="mini m1">🌷</span>
+        <span class="mini m2">💌</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== newsletter ==================== -->
+<section class="news">
+  <div class="wrap">
+    <div class="news-card reveal">
+      <span class="blob b1"></span>
+      <span class="blob b2"></span>
+      <span class="tape"></span>
+      <span class="tape two gold"></span>
+      <h2>انضمي لنادي صنع بحب — خصم <span class="squiggle">١٠٪</span> 💌</h2>
+      <p>
+        رسالة لطيفة كل أسبوعين: قطع جديدة قبل الجميع، حكايات الصانعات،
+        وخصم ترحيبي ١٠٪ على طلبك الأول.
+      </p>
+      <form class="news-form" id="newsForm" novalidate>
+        <input type="email" id="newsEmail" placeholder="بريدك الإلكتروني الجميل…" aria-label="البريد الإلكتروني" required>
+        <button type="submit">انضمّي للنادي</button>
+      </form>
+      <p class="news-done" id="newsDone">أهلاً بك في العائلة! 🧡 كود خصمك في طريقه إلى بريدك.</p>
+      <p class="news-note">نرسل الجميل فقط — لا إزعاج، ويمكنك الانسحاب بأي وقت 🌿</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== footer ==================== -->
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream);display:block">
+  <path d="M0,38 C150,66 300,10 470,32 C640,54 780,60 950,34 C1120,8 1280,56 1440,36 L1440,70 L0,70 Z" fill="#004956"/>
+</svg>
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div class="f-logo">
+          <span class="logo-mark">🧶</span>
+          <span>
+            <span class="logo-name">صنع بحب</span><br>
+            <span class="logo-tag">استوديو الحرفة السعودي</span>
+          </span>
+        </div>
+        <p class="f-about">
+          مجموعة من المنتجات التي صنعت بحب في السعودية — نصل الصانعات الموهوبات
+          بالبيوت التي تقدّر الجمال المصنوع يدوياً.
+        </p>
+        <div class="f-social">
+          <a href="#" aria-label="انستقرام">📷</a>
+          <a href="#" aria-label="تيك توك">🎵</a>
+          <a href="#" aria-label="سناب شات">👻</a>
+          <a href="#" aria-label="واتساب">💬</a>
+        </div>
+      </div>
+      <div>
+        <h4>الأقسام</h4>
+        <ul>
+          <li><a href="#cats">شموع وعطور</a></li>
+          <li><a href="#cats">كروشيه</a></li>
+          <li><a href="#cats">فخار وخزف</a></li>
+          <li><a href="#cats">خوص وسلال</a></li>
+          <li><a href="#cats">لوحات فنية</a></li>
+          <li><a href="#gift">هدايا</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>عن الاستوديو</h4>
+        <ul>
+          <li><a href="#story">حكايتنا</a></li>
+          <li><a href="#brands">متاجرنا الثلاثة</a></li>
+          <li><a href="#">انضمي كصانعة</a></li>
+          <li><a href="#">سياسة الاستبدال</a></li>
+          <li><a href="#">الشحن والتوصيل</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>نحن هنا لأجلك</h4>
+        <ul>
+          <li>💬 love@sona3behob.sa</li>
+          <li>📍 الرياض، المملكة العربية السعودية</li>
+          <li>🕰️ السبت–الخميس: ٩ص – ٩م</li>
+        </ul>
+        <div class="f-pay">
+          <span>مدى</span><span>Apple Pay</span><span>Visa</span><span>تمارا</span><span>تابي</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bar">
+      © ١٤٤٧هـ — ٢٠٢٦م <b>صنع بحب</b> · جميع الحقوق محفوظة · صُنع هذا الموقع أيضاً بحب 🧡
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // newsletter (mock)
+  const form = document.getElementById('newsForm');
+  form.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const email = document.getElementById('newsEmail');
+    if (!email.value || !email.value.includes('@')) {
+      email.style.outline = '2px dashed #cd7f5d';
+      email.focus();
+      return;
+    }
+    form.style.display = 'none';
+    document.getElementById('newsDone').style.display = 'block';
+  });
+
+  // playful cart bump
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const c = document.querySelector('.cart-count');
+      const map = {'٠':0,'١':1,'٢':2,'٣':3,'٤':4,'٥':5,'٦':6,'٧':7,'٨':8,'٩':9};
+      const digits = '٠١٢٣٤٥٦٧٨٩';
+      let n = [...c.textContent].reduce((a, ch) => a * 10 + (map[ch] ?? 0), 0) + 1;
+      c.textContent = [...String(n)].map(d => digits[+d]).join('');
+      c.animate([{transform:'scale(1)'},{transform:'scale(1.6)'},{transform:'scale(1)'}], {duration:380, easing:'ease-out'});
+    });
+  });
+</script>
+</body>
+</html>

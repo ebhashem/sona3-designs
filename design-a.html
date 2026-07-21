@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صنع بحب — تصميم جديد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#004956;
+    --teal-deep:#00333d;
+    --coral:#ff6b57;
+    --peach:#ffb4a2;
+    --mustard:#ffc94d;
+    --pink:#ffd6e8;
+    --cream:#fff6ec;
+    --ink:#1d2b2e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;
+    background-image:radial-gradient(rgba(0,73,86,.06) 2px,transparent 2px);background-size:26px 26px}
+  h1,h2,h3,.display{font-family:'Baloo Bhaijaan 2',cursive}
+
+  /* ---------- announcement bar ---------- */
+  .announce{background:var(--ink);color:var(--cream);text-align:center;padding:9px 5%;font-family:'Baloo Bhaijaan 2';font-weight:600;font-size:.95rem}
+  .announce b{color:var(--mustard)}
+
+  /* wavy divider */
+  .wave{display:block;width:100%;height:34px;background:radial-gradient(circle at 50% 0,transparent 16px,var(--cream) 17px);background-size:44px 34px;background-position:22px 0}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:3px solid var(--ink);padding:14px 5%;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:'Baloo Bhaijaan 2';font-weight:800;font-size:1.6rem;color:var(--teal);display:flex;align-items:center;gap:8px}
+  .logo .heart{display:inline-grid;place-items:center;width:38px;height:38px;background:var(--coral);border:3px solid var(--ink);border-radius:50% 50% 50% 6px;transform:rotate(-8deg);font-size:1.1rem}
+  .nav-links{display:flex;gap:28px;font-weight:500}
+  .nav-links a{color:var(--ink);text-decoration:none;position:relative}
+  .nav-links a:hover{color:var(--coral)}
+  .nav-cta{display:flex;gap:10px}
+  .pill{border:3px solid var(--ink);border-radius:999px;padding:8px 20px;font-weight:700;font-family:'Baloo Bhaijaan 2';cursor:pointer;background:#fff;transition:.2s;box-shadow:3px 3px 0 var(--ink)}
+  .pill:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+  .pill.solid{background:var(--teal);color:#fff}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:70px 5% 90px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;background:var(--teal);overflow:hidden}
+  .hero .blob{position:absolute;border-radius:50%;filter:blur(0)}
+  .blob1{width:420px;height:420px;background:var(--coral);opacity:.25;top:-140px;left:-120px;animation:float 9s ease-in-out infinite}
+  .blob2{width:260px;height:260px;background:var(--mustard);opacity:.2;bottom:-90px;right:30%;animation:float 7s ease-in-out infinite reverse}
+  @keyframes float{50%{transform:translateY(24px) rotate(6deg)}}
+  .hero-copy{position:relative;color:#fff}
+  .kicker{display:inline-block;background:var(--mustard);color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:6px 18px;font-weight:700;font-family:'Baloo Bhaijaan 2';transform:rotate(2deg);margin-bottom:22px}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.1;font-weight:800}
+  .hero h1 .swash{color:var(--mustard);position:relative;display:inline-block}
+  .hero h1 .swash::after{content:"";position:absolute;right:0;left:0;bottom:6px;height:14px;background:var(--coral);z-index:-1;border-radius:8px;transform:rotate(-1.5deg)}
+  .hero p{margin:20px 0 32px;font-size:1.15rem;opacity:.9;max-width:34ch;line-height:1.9}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{font-family:'Baloo Bhaijaan 2';font-weight:800;font-size:1.05rem;border:3px solid var(--ink);border-radius:16px;padding:14px 32px;cursor:pointer;transition:.2s;box-shadow:4px 4px 0 var(--ink)}
+  .btn:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink)}
+  .btn.coral{background:var(--coral);color:#fff}
+  .btn.ghost{background:var(--cream);color:var(--teal)}
+  .hero-art{position:relative;display:grid;place-items:center}
+  .polaroid{background:#fff;border:3px solid var(--ink);padding:14px 14px 46px;border-radius:10px;box-shadow:8px 8px 0 rgba(0,0,0,.25);transform:rotate(-4deg);max-width:420px;width:100%}
+  .polaroid img{width:100%;border-radius:6px;display:block;aspect-ratio:4/3;object-fit:cover}
+  .polaroid .cap{font-family:'Baloo Bhaijaan 2';font-weight:700;text-align:center;margin-top:12px;color:var(--teal)}
+  .sticker{position:absolute;font-family:'Baloo Bhaijaan 2';font-weight:800;border:3px solid var(--ink);border-radius:999px;padding:10px 18px;box-shadow:3px 3px 0 var(--ink)}
+  .st1{background:var(--pink);top:-6px;left:6%;transform:rotate(8deg)}
+  .st2{background:var(--mustard);bottom:8%;right:2%;transform:rotate(-7deg)}
+
+  /* ---------- marquee ---------- */
+  .marquee{background:var(--coral);border-block:3px solid var(--ink);overflow:hidden;padding:12px 0}
+  .marquee-track{display:flex;gap:48px;white-space:nowrap;animation:scroll 22s linear infinite;font-family:'Baloo Bhaijaan 2';font-weight:800;font-size:1.15rem;color:#fff}
+  @keyframes scroll{to{transform:translateX(50%)}}
+
+  /* ---------- sections ---------- */
+  section{padding:80px 5%}
+  .sec-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px}
+  .sec-head h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:800;color:var(--teal)}
+  .sec-head h2 em{font-style:normal;color:var(--coral)}
+  .link-all{font-family:'Baloo Bhaijaan 2';font-weight:700;color:var(--ink);text-decoration:none;border-bottom:3px solid var(--mustard)}
+
+  /* products */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px}
+  .card{background:#fff;border:3px solid var(--ink);border-radius:22px;overflow:hidden;transition:.25s;position:relative}
+  .card:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:8px 8px 0 var(--teal)}
+  .card .ph{aspect-ratio:1;display:grid;place-items:center;font-size:4rem;border-bottom:3px solid var(--ink)}
+  .c1{background:var(--pink)} .c2{background:var(--mustard)} .c3{background:var(--peach)} .c4{background:#cde8e2}
+  .card .info{padding:18px}
+  .card h3{font-size:1.15rem;color:var(--teal)}
+  .card .brand{font-size:.85rem;color:#8a8078;margin:4px 0 10px}
+  .card .row{display:flex;justify-content:space-between;align-items:center}
+  .price{font-family:'Baloo Bhaijaan 2';font-weight:800;font-size:1.2rem;color:var(--coral)}
+  .add{width:42px;height:42px;border-radius:50%;border:3px solid var(--ink);background:var(--mustard);font-size:1.3rem;font-weight:800;cursor:pointer;transition:.2s}
+  .add:hover{background:var(--coral);color:#fff;transform:rotate(90deg)}
+  .badge{position:absolute;top:14px;right:14px;background:var(--coral);color:#fff;border:3px solid var(--ink);border-radius:999px;padding:4px 14px;font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:.85rem;transform:rotate(6deg);z-index:2}
+
+  /* collections circles */
+  .cats{padding-top:0}
+  .cat-row{display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+  .cat{display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+  .cat .disc{width:120px;height:120px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;font-size:2.6rem;transition:.25s;box-shadow:4px 4px 0 var(--ink)}
+  .cat:nth-child(1) .disc{background:var(--pink)} .cat:nth-child(2) .disc{background:var(--mustard)}
+  .cat:nth-child(3) .disc{background:var(--peach)} .cat:nth-child(4) .disc{background:#cde8e2}
+  .cat:nth-child(5) .disc{background:#d9d0ff} .cat:nth-child(6) .disc{background:#ffe3a3}
+  .cat:hover .disc{transform:rotate(8deg) scale(1.07)}
+  .cat span{font-family:'Baloo Bhaijaan 2';font-weight:700}
+
+  /* gift edit */
+  .gift{background:var(--peach);border-block:3px solid var(--ink);display:grid;grid-template-columns:1fr 1.2fr;gap:50px;align-items:center}
+  .gift h2{font-size:clamp(2rem,4vw,3rem);color:var(--ink)}
+  .gift h2 em{font-style:normal;color:#c33f2c}
+  .gift p{margin:16px 0 26px;line-height:2}
+  .gift-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .gift-card{background:var(--cream);border:3px solid var(--ink);border-radius:20px;padding:22px 14px;text-align:center;font-family:'Baloo Bhaijaan 2';font-weight:700;transition:.2s}
+  .gift-card:hover{transform:translateY(-6px) rotate(-2deg);box-shadow:6px 6px 0 var(--ink)}
+  .gift-card .em{font-size:2.4rem;display:block;margin-bottom:10px}
+
+  /* brands */
+  .brands{background:var(--pink);border-block:3px solid var(--ink)}
+  .brand-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+  .brand-card{background:#fff;border:3px solid var(--ink);border-radius:26px;padding:30px;text-align:center;transition:.25s;text-decoration:none;color:var(--ink)}
+  .brand-card:hover{transform:rotate(2deg) scale(1.03);box-shadow:8px 8px 0 var(--ink)}
+  .brand-card img{width:110px;height:110px;object-fit:contain;border-radius:50%;border:3px solid var(--ink);background:var(--cream);padding:10px;margin-bottom:16px}
+  .brand-card h3{color:var(--teal);font-size:1.25rem}
+  .brand-card p{font-size:.9rem;color:#7a6f66;margin-top:6px}
+
+  /* story */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;background:var(--teal);color:#fff}
+  .story h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:800}
+  .story h2 span{color:var(--mustard)}
+  .story p{margin-top:18px;line-height:2;opacity:.9}
+  .stats{display:flex;gap:20px;margin-top:34px;flex-wrap:wrap}
+  .stat{background:var(--cream);color:var(--ink);border:3px solid var(--ink);border-radius:18px;padding:16px 24px;box-shadow:4px 4px 0 rgba(0,0,0,.3)}
+  .stat b{display:block;font-family:'Baloo Bhaijaan 2';font-size:1.7rem;color:var(--coral)}
+  .story-art{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .tile{aspect-ratio:1;border:3px solid var(--ink);border-radius:24px;display:grid;place-items:center;font-size:3rem}
+  .t1{background:var(--coral);transform:rotate(-3deg)}
+  .t2{background:var(--mustard);transform:rotate(2deg) translateY(18px)}
+  .t3{background:var(--pink);transform:rotate(3deg)}
+  .t4{background:var(--peach);transform:rotate(-2deg) translateY(18px)}
+
+  /* features */
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px}
+  .feature{border:3px solid var(--ink);border-radius:24px;padding:28px;background:#fff;transition:.2s}
+  .feature:hover{transform:translateY(-6px);box-shadow:6px 6px 0 var(--ink)}
+  .feature .ico{width:60px;height:60px;border-radius:50% 50% 50% 8px;border:3px solid var(--ink);display:grid;place-items:center;font-size:1.6rem;margin-bottom:16px}
+  .f1 .ico{background:var(--mustard)} .f2 .ico{background:var(--pink)} .f3 .ico{background:var(--peach)}
+  .feature h3{color:var(--teal);margin-bottom:8px}
+
+  /* newsletter */
+  .news{background:var(--mustard);border-block:3px solid var(--ink);text-align:center}
+  .news h2{font-size:clamp(1.8rem,4vw,2.8rem);color:var(--ink)}
+  .news form{margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .news input{border:3px solid var(--ink);border-radius:999px;padding:14px 26px;width:min(360px,90%);font-family:inherit;font-size:1rem;background:var(--cream)}
+
+  /* footer */
+  footer{background:var(--teal-deep);color:#fff;padding:60px 5% 30px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  footer a{color:#bcd8dd;text-decoration:none;display:block;margin-top:10px}
+  footer a:hover{color:var(--mustard)}
+  .foot-logo{font-family:'Baloo Bhaijaan 2';font-weight:800;font-size:1.5rem;color:var(--mustard)}
+  .copy{border-top:1px solid rgba(255,255,255,.15);padding-top:22px;text-align:center;font-size:.85rem;opacity:.7}
+
+  @media(max-width:860px){
+    .hero,.story,.gift{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .foot-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">🚚 شحن مجاني للطلبات فوق <b>٢٠٠ ر.س</b> — وتغليف هدايا بحب 💝</div>
+
+<nav>
+  <div class="logo"><span class="heart">🤍</span> صنع بحب</div>
+  <div class="nav-links">
+    <a href="#">الرئيسية</a><a href="#">المنتجات</a><a href="#">الماركات</a><a href="#">قصتنا</a><a href="#">تواصل معنا</a>
+  </div>
+  <div class="nav-cta">
+    <button class="pill">🛒 السلة</button>
+    <button class="pill solid">تسجيل الدخول</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="blob blob1"></div><div class="blob blob2"></div>
+  <div class="hero-copy">
+    <span class="kicker">✨ صناعة سعودية 100%</span>
+    <h1>منتجات <span class="swash">صُنعت بحب</span><br>تصل لبابك بفرح</h1>
+    <p>كل قطعة عندنا لها قصة.. صنعتها أيادي سعودية مبدعة بشغف وحب، عشان توصلك بأجمل صورة.</p>
+    <div class="hero-cta">
+      <button class="btn coral">تسوق الآن 🛍️</button>
+      <button class="btn ghost">تعرف على الحرفيين</button>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="polaroid">
+      <img src="https://cdn.files.salla.network/homepage/1161127395/f8f80c0b-7046-4183-a952-f09a176a724b.webp" alt="صنع بحب">
+      <div class="cap">من أيدينا.. إلى قلبك 🤍</div>
+    </div>
+    <span class="sticker st1">جديد!</span>
+    <span class="sticker st2">100% يدوي</span>
+  </div>
+</header>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>🧡 صنع بحب</span><span>✂️ حرفة يدوية</span><span>🇸🇦 صناعة سعودية</span><span>🚚 شحن سريع</span><span>💌 تغليف هدايا</span>
+    <span>🧡 صنع بحب</span><span>✂️ حرفة يدوية</span><span>🇸🇦 صناعة سعودية</span><span>🚚 شحن سريع</span><span>💌 تغليف هدايا</span>
+  </div>
+</div>
+
+<section class="cats">
+  <div class="sec-head" style="justify-content:center">
+    <h2>تسوق حسب <em>الفئة</em></h2>
+  </div>
+  <div class="cat-row">
+    <a class="cat" href="#"><div class="disc">🕯️</div><span>شموع وعطور</span></a>
+    <a class="cat" href="#"><div class="disc">🧶</div><span>كروشيه</span></a>
+    <a class="cat" href="#"><div class="disc">🏺</div><span>فخار وخزف</span></a>
+    <a class="cat" href="#"><div class="disc">🧺</div><span>خوص وسلال</span></a>
+    <a class="cat" href="#"><div class="disc">🎨</div><span>لوحات فنية</span></a>
+    <a class="cat" href="#"><div class="disc">💝</div><span>هدايا</span></a>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>أحدث <em>المنتجات</em> 🎁</h2>
+    <a class="link-all" href="#">عرض الكل ←</a>
+  </div>
+  <div class="grid">
+    <div class="card"><span class="badge">جديد</span><div class="ph c1">🕯️</div><div class="info"><h3>شمعة عطرية يدوية</h3><div class="brand">متجر سلمى</div><div class="row"><span class="price">٧٩ ر.س</span><button class="add">+</button></div></div></div>
+    <div class="card"><span class="badge" style="background:var(--mustard);color:var(--ink)">٢ بـ ١٩٩ ر.س</span><div class="ph c2">🧺</div><div class="info"><h3>سلة خوص مزخرفة</h3><div class="brand">نور</div><div class="row"><span class="price">١٢٩ ر.س</span><button class="add">+</button></div></div></div>
+    <div class="card"><span class="badge">الأكثر مبيعًا</span><div class="ph c3">🧸</div><div class="info"><h3>دمية كروشيه محبوكة</h3><div class="brand">دولي</div><div class="row"><span class="price">٩٩ ر.س</span><button class="add">+</button></div></div></div>
+    <div class="card"><div class="ph c4">🏺</div><div class="info"><h3>مزهرية فخار مرسومة</h3><div class="brand">متجر سلمى</div><div class="row"><span class="price">١٥٩ ر.س</span><button class="add">+</button></div></div></div>
+  </div>
+</section>
+
+<section class="gift">
+  <div>
+    <h2>🎁 ركن <em>الهدايا</em></h2>
+    <p>محتار وش تهدي؟ اخترنا لك هدايا مصنوعة بحب لكل مناسبة — مع تغليف هدايا مجاني يفرّح القلب.</p>
+    <button class="btn coral">تسوق الهدايا</button>
+  </div>
+  <div class="gift-cards">
+    <div class="gift-card"><span class="em">💍</span>زواج وخطوبة</div>
+    <div class="gift-card"><span class="em">👶</span>مواليد</div>
+    <div class="gift-card"><span class="em">🎓</span>تخرج</div>
+    <div class="gift-card"><span class="em">🏡</span>بيت جديد</div>
+    <div class="gift-card"><span class="em">🌙</span>مواسم وأعياد</div>
+    <div class="gift-card"><span class="em">💐</span>لمن تحب</div>
+  </div>
+</section>
+
+<section class="brands">
+  <div class="sec-head">
+    <h2>ماركات <em>صُنعت بحب</em> 💕</h2>
+    <a class="link-all" href="#">عرض الكل ←</a>
+  </div>
+  <div class="brand-row">
+    <a class="brand-card" href="#">
+      <img src="https://cdn.files.salla.network/brands/1161127395/7cb2db59-859a-45fa-9ef9-666d85cada9b_900x900.webp" alt="متجر سلمى">
+      <h3>متجر سلمى</h3><p>Salma Store</p>
+    </a>
+    <a class="brand-card" href="#">
+      <img src="https://cdn.salla.sa/RABaNP/PELESVNJk0Vbdv2AlMI6YMh174CjTr1QBondyjL2.png" alt="دولي">
+      <h3>دولي</h3><p>Dolly's</p>
+    </a>
+    <a class="brand-card" href="#">
+      <img src="https://cdn.salla.sa/RABaNP/brands/2BsviGrAGVzhU1ygjTM9srAypnjAzMrAReDv0Fua.png" alt="نور">
+      <h3>نور</h3><p>Noor</p>
+    </a>
+  </div>
+</section>
+
+<section class="story">
+  <div>
+    <h2>كل منتج عندنا.. <span>له قصة 📖</span></h2>
+    <p>نؤمن أن المنتجات اليدوية تحمل روح صانعها. لذلك نجمع لك أجمل ما تصنعه الأيادي السعودية المبدعة في مكان واحد — بحب، ومن القلب.</p>
+    <div class="stats">
+      <div class="stat"><b>+٥٠</b> حرفي وحرفية</div>
+      <div class="stat"><b>+١٠٠٠</b> منتج يدوي</div>
+      <div class="stat"><b>٤.٩ ★</b> تقييم العملاء</div>
+    </div>
+  </div>
+  <div class="story-art">
+    <div class="tile t1">🎨</div><div class="tile t2">🧶</div><div class="tile t3">✂️</div><div class="tile t4">🤍</div>
+  </div>
+</section>
+
+<section>
+  <div class="features">
+    <div class="feature f1"><div class="ico">🔒</div><h3>تسوق آمن</h3><p>تجربة آمنة وخصوصية تامة في كل طلب.</p></div>
+    <div class="feature f2"><div class="ico">💬</div><h3>خدمة العملاء</h3><p>فريقنا معك في أي وقت، بحب.</p></div>
+    <div class="feature f3"><div class="ico">🚚</div><h3>شحن سريع</h3><p>طلبك يوصلك في وقت قياسي.</p></div>
+  </div>
+</section>
+
+<section class="news">
+  <h2>انضم لنادي صنع بحب 💌</h2>
+  <p style="font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:1.2rem;margin-top:8px">خصم ١٠٪ على أول طلب + قصص الحرفيين والعروض الحصرية</p>
+  <form onsubmit="return false">
+    <input type="email" placeholder="بريدك الإلكتروني">
+    <button class="btn coral">اشترك</button>
+  </form>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">🤍 صنع بحب</div>
+      <p style="margin-top:14px;opacity:.8;line-height:1.9">مجموعة من المنتجات التي صنعت بحب في السعودية</p>
+    </div>
+    <div><h3>روابط مهمة</h3><a href="#">المنتجات</a><a href="#">الماركات</a><a href="#">قصتنا</a></div>
+    <div><h3>تواصل معنا</h3><a href="#">واتساب</a><a href="#">انستقرام</a><a href="#">تويتر</a></div>
+  </div>
+  <div class="copy">الحقوق محفوظة © ٢٠٢٦ صنع بحب</div>
+</footer>
+
+</body>
+</html>
