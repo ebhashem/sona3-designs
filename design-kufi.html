@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صنع بحب — سوق المنتجات اليدوية السعودية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F4EFDF;
+    --rose:#D2A0A0;
+    --crimson:#972C2E;
+    --crimson-dark:#7A2226;
+    --rose-tint:#E7CBCB;
+    --ink:#3A2222;
+    --kufi:'Reem Kufi',sans-serif;
+    --body:'IBM Plex Sans Arabic',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    background:var(--ivory);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  button{font-family:var(--body);cursor:pointer;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3,.kufi{font-family:var(--kufi);}
+
+  /* ---------- heart motif ---------- */
+  .heart{
+    display:inline-block;width:.62em;height:.62em;position:relative;
+    transform:rotate(-45deg);background:currentColor;vertical-align:middle;
+  }
+  .heart::before,.heart::after{content:"";position:absolute;width:100%;height:100%;border-radius:50%;background:currentColor;}
+  .heart::before{top:-50%;left:0;}
+  .heart::after{top:0;left:50%;}
+
+  /* ---------- announcement ---------- */
+  .announce{
+    background:var(--crimson);color:var(--ivory);
+    font-size:14px;font-weight:500;letter-spacing:.02em;
+    padding:10px 16px;text-align:center;
+  }
+  .announce .heart{width:9px;height:9px;margin:0 10px;color:var(--rose);}
+
+  /* ---------- header ---------- */
+  header{
+    background:var(--ivory);
+    border-bottom:3px solid var(--crimson);
+    position:sticky;top:0;z-index:50;
+  }
+  .header-in{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:24px;padding:14px 0;
+  }
+  .logo-link{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .logo-link img{height:64px;width:auto;}
+  .logo-fallback{
+    display:none;font-family:var(--kufi);font-weight:700;font-size:30px;color:var(--crimson);
+  }
+  nav.mainnav{display:flex;gap:6px;}
+  nav.mainnav a{
+    font-family:var(--kufi);font-size:17px;font-weight:600;
+    padding:10px 18px;color:var(--ink);
+    transition:background .15s,color .15s,transform .15s;
+  }
+  nav.mainnav a:hover,nav.mainnav a.active{
+    background:var(--crimson);color:var(--ivory);
+  }
+  .header-actions{display:flex;align-items:center;gap:10px;}
+  .icon-btn{
+    width:44px;height:44px;display:grid;place-items:center;
+    background:transparent;border:2px solid var(--ink);
+    font-size:18px;position:relative;color:var(--ink);
+    transition:transform .15s,box-shadow .15s,background .15s;
+  }
+  .icon-btn:hover{
+    background:var(--rose-tint);
+    transform:translate(3px,-3px);
+    box-shadow:-4px 4px 0 var(--crimson);
+  }
+  .cart-count{
+    position:absolute;top:-9px;left:-9px;
+    background:var(--crimson);color:var(--ivory);
+    font-size:11px;font-weight:700;min-width:20px;height:20px;
+    display:grid;place-items:center;padding:0 4px;
+  }
+  .burger{display:none;}
+
+  /* mobile menu */
+  .mobile-menu{
+    display:none;background:var(--ivory);
+    border-bottom:3px solid var(--crimson);
+    padding:8px 32px 20px;
+  }
+  .mobile-menu.open{display:block;}
+  .mobile-menu a{
+    display:block;font-family:var(--kufi);font-size:18px;font-weight:600;
+    padding:12px 8px;border-bottom:1px solid var(--rose-tint);
+  }
+  .mobile-menu a:last-child{border-bottom:none;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 88px;position:relative;overflow:hidden;}
+  .hero-grid{
+    display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;
+  }
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--rose-tint);color:var(--crimson);
+    font-weight:600;font-size:14px;padding:8px 18px;margin-bottom:26px;
+  }
+  .hero-eyebrow .heart{width:10px;height:10px;}
+  .hero h1{
+    font-size:clamp(40px,5.2vw,68px);line-height:1.35;font-weight:700;
+    color:var(--ink);margin-bottom:8px;
+  }
+  .hero h1 .blk-rose,.hero h1 .blk-crimson{
+    display:inline-block;padding:0 16px;line-height:1.5;
+  }
+  .hero h1 .blk-rose{background:var(--rose);color:var(--ivory);transform:rotate(0deg);}
+  .hero h1 .blk-crimson{background:var(--crimson);color:var(--ivory);margin-top:10px;}
+  .hero p{
+    font-size:18px;line-height:2;color:#6b5252;max-width:44ch;margin:22px 0 34px;
+  }
+  .btn{
+    display:inline-block;font-family:var(--kufi);font-weight:700;font-size:18px;
+    padding:16px 40px;border:none;
+    transition:transform .15s,box-shadow .15s;
+  }
+  .btn-crimson{background:var(--crimson);color:var(--ivory);}
+  .btn-outline{background:transparent;color:var(--crimson);box-shadow:inset 0 0 0 3px var(--crimson);}
+  .btn:hover{transform:translate(4px,-4px);}
+  .btn-crimson:hover{box-shadow:-6px 6px 0 var(--rose);}
+  .btn-outline:hover{box-shadow:inset 0 0 0 3px var(--crimson),-6px 6px 0 var(--rose-tint);}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;}
+
+  .hero-visual{position:relative;}
+  .hero-frame{
+    position:relative;background:var(--crimson);padding:0;
+    box-shadow:-16px 16px 0 var(--rose);
+  }
+  .hero-frame img{width:100%;height:420px;object-fit:cover;mix-blend-mode:normal;}
+  .hero-tag{
+    position:absolute;bottom:-24px;right:-18px;
+    background:var(--ivory);border:3px solid var(--crimson);
+    font-family:var(--kufi);font-weight:700;font-size:17px;color:var(--crimson);
+    padding:12px 22px;display:flex;align-items:center;gap:10px;
+  }
+  .hero-tag .heart{width:12px;height:12px;color:var(--crimson);}
+  /* diagonal interlock strips echoing logo */
+  .hero-strips{position:absolute;inset-inline-start:-60px;top:-40px;width:220px;height:220px;pointer-events:none;opacity:.9;}
+  .strip{position:absolute;height:26px;transform:rotate(-45deg);transform-origin:center;}
+
+  /* ---------- section headers ---------- */
+  .sec{padding:72px 0;}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:44px;}
+  .sec-title{display:flex;align-items:center;gap:18px;}
+  .sec-block{
+    width:52px;height:52px;background:var(--crimson);flex-shrink:0;
+    display:grid;place-items:center;color:var(--ivory);
+  }
+  .sec-block .heart{width:16px;height:16px;}
+  .sec-title h2{font-size:clamp(26px,3vw,38px);font-weight:700;line-height:1.4;}
+  .sec-link{
+    font-family:var(--kufi);font-weight:600;font-size:16px;color:var(--crimson);
+    border-bottom:3px solid var(--rose);padding-bottom:4px;
+    transition:border-color .15s;white-space:nowrap;
+  }
+  .sec-link:hover{border-color:var(--crimson);}
+
+  /* ---------- categories ---------- */
+  .cats{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  .cat{
+    position:relative;aspect-ratio:1/1.15;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:14px;text-align:center;
+    padding:18px 10px;overflow:hidden;
+    transition:transform .18s,box-shadow .18s;
+  }
+  .cat:nth-child(odd){background:var(--rose-tint);}
+  .cat:nth-child(even){background:var(--rose);}
+  .cat:hover{transform:translate(5px,-5px);box-shadow:-7px 7px 0 var(--crimson);}
+  .cat .cat-icon{
+    width:64px;height:64px;background:var(--ivory);
+    display:grid;place-items:center;font-size:30px;
+  }
+  .cat h3{font-size:18px;font-weight:700;color:var(--ink);line-height:1.5;}
+  .cat:nth-child(even) h3{color:#fff;}
+  .cat .cat-corner{
+    position:absolute;top:0;inset-inline-start:0;width:34px;height:34px;
+    background:var(--crimson);
+    clip-path:polygon(0 0,100% 0,0 100%);
+  }
+  .cat .heart{width:9px;height:9px;color:var(--crimson);}
+  .cat:nth-child(even) .heart{color:var(--ivory);}
+
+  /* ---------- products ---------- */
+  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .card{
+    background:#fff;border:3px solid var(--ink);
+    display:flex;flex-direction:column;
+    transition:transform .18s,box-shadow .18s;
+  }
+  .card:hover{transform:translate(5px,-5px);box-shadow:-8px 8px 0 var(--rose);}
+  .card-media{
+    position:relative;aspect-ratio:1/1;display:grid;place-items:center;
+    font-size:72px;
+  }
+  .card:nth-child(1) .card-media{background:var(--rose-tint);}
+  .card:nth-child(2) .card-media{background:var(--rose);}
+  .card:nth-child(3) .card-media{background:var(--rose-tint);}
+  .card:nth-child(4) .card-media{background:var(--rose);}
+  .badge{
+    position:absolute;top:12px;inset-inline-start:12px;
+    background:var(--crimson);color:var(--ivory);
+    font-family:var(--kufi);font-weight:700;font-size:13px;
+    padding:6px 14px;
+  }
+  .badge.rose{background:var(--ivory);color:var(--crimson);border:2px solid var(--crimson);}
+  .card-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .card-maker{
+    font-size:12.5px;color:var(--crimson);font-weight:600;
+    display:flex;align-items:center;gap:7px;
+  }
+  .card-maker .heart{width:8px;height:8px;}
+  .card h3{font-size:17px;font-weight:700;line-height:1.6;}
+  .card-price-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px;}
+  .price{font-family:var(--kufi);font-weight:700;font-size:19px;color:var(--crimson);}
+  .price small{font-size:13px;font-weight:600;}
+  .old-price{font-size:13px;color:#a08585;text-decoration:line-through;margin-inline-start:8px;}
+  .add-btn{
+    width:42px;height:42px;background:var(--ink);color:var(--ivory);
+    border:none;font-size:20px;line-height:1;display:grid;place-items:center;
+    transition:background .15s,transform .15s;
+  }
+  .add-btn:hover{background:var(--crimson);transform:translate(2px,-2px);}
+
+  /* ---------- brands ---------- */
+  .brands-sec{background:var(--rose-tint);position:relative;overflow:hidden;}
+  .brands-sec::before{
+    content:"";position:absolute;top:-70px;inset-inline-end:-70px;
+    width:230px;height:230px;background:var(--rose);
+    transform:rotate(45deg);
+  }
+  .brands{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative;}
+  .brand{
+    background:var(--ivory);padding:34px 26px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:16px;
+    transition:transform .18s,box-shadow .18s;
+  }
+  .brand:hover{transform:translate(5px,-5px);box-shadow:-8px 8px 0 var(--crimson);}
+  .brand .brand-logo{
+    width:104px;height:104px;object-fit:cover;
+    border:3px solid var(--crimson);background:#fff;
+  }
+  .brand h3{font-size:22px;font-weight:700;}
+  .brand p{font-size:14px;color:#6b5252;line-height:1.9;}
+  .brand .brand-cta{
+    font-family:var(--kufi);font-weight:600;font-size:14px;color:var(--crimson);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .brand .heart{width:9px;height:9px;color:var(--crimson);}
+
+  /* ---------- maker story ---------- */
+  .story{background:var(--crimson);color:var(--ivory);position:relative;overflow:hidden;}
+  .story .story-strips{position:absolute;top:0;bottom:0;inset-inline-start:-40px;width:200px;pointer-events:none;}
+  .story .story-strips span{
+    position:absolute;width:300px;height:30px;transform:rotate(-45deg);
+  }
+  .story-grid{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;
+    position:relative;
+  }
+  .story h2{font-size:clamp(28px,3.4vw,44px);line-height:1.5;font-weight:700;margin-bottom:20px;}
+  .story h2 .mark{background:var(--rose);color:var(--crimson-dark);padding:0 12px;display:inline-block;line-height:1.55;}
+  .story p{font-size:17px;line-height:2.1;color:var(--rose-tint);max-width:52ch;margin-bottom:32px;}
+  .story .btn-ivory{background:var(--ivory);color:var(--crimson);}
+  .story .btn-ivory:hover{box-shadow:-6px 6px 0 var(--rose);}
+  .story-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .stat{
+    background:var(--crimson-dark);padding:30px 22px;text-align:center;
+  }
+  .stat:nth-child(2),.stat:nth-child(3){background:transparent;box-shadow:inset 0 0 0 3px var(--rose);}
+  .stat b{display:block;font-family:var(--kufi);font-size:36px;font-weight:700;color:var(--rose);margin-bottom:6px;}
+  .stat span{font-size:14px;color:var(--ivory);font-weight:500;}
+
+  /* ---------- features ---------- */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .feature{
+    background:#fff;border:3px solid var(--ink);padding:34px 28px;
+    display:flex;flex-direction:column;gap:14px;
+    transition:transform .18s,box-shadow .18s;
+  }
+  .feature:hover{transform:translate(5px,-5px);box-shadow:-8px 8px 0 var(--rose);}
+  .feature .f-icon{
+    width:58px;height:58px;background:var(--crimson);color:var(--ivory);
+    display:grid;place-items:center;font-size:26px;
+  }
+  .feature:nth-child(2) .f-icon{background:var(--rose);}
+  .feature h3{font-size:20px;font-weight:700;}
+  .feature p{font-size:14.5px;line-height:1.95;color:#6b5252;}
+
+  /* ---------- newsletter ---------- */
+  .newsletter{background:var(--rose);position:relative;overflow:hidden;}
+  .newsletter::after{
+    content:"";position:absolute;bottom:-80px;inset-inline-start:-80px;
+    width:240px;height:240px;background:var(--rose-tint);transform:rotate(45deg);
+  }
+  .news-in{
+    position:relative;display:grid;grid-template-columns:1fr auto;gap:40px;
+    align-items:center;padding:64px 0;z-index:1;
+  }
+  .newsletter h2{font-size:clamp(26px,3vw,38px);font-weight:700;color:#fff;line-height:1.5;margin-bottom:10px;}
+  .newsletter h2 .disc{
+    background:var(--crimson);color:var(--ivory);padding:0 14px;display:inline-block;line-height:1.55;
+  }
+  .newsletter p{font-size:16px;color:#5f3a3a;font-weight:500;}
+  .news-form{display:flex;gap:0;min-width:min(440px,100%);}
+  .news-form input{
+    flex:1;border:3px solid var(--crimson);border-inline-end:none;background:var(--ivory);
+    font-family:var(--body);font-size:16px;padding:16px 20px;color:var(--ink);outline:none;
+  }
+  .news-form input::placeholder{color:#a08585;}
+  .news-form button{
+    background:var(--crimson);color:var(--ivory);border:3px solid var(--crimson);
+    font-family:var(--kufi);font-weight:700;font-size:17px;padding:16px 30px;
+    transition:background .15s;
+  }
+  .news-form button:hover{background:var(--crimson-dark);}
+  .news-msg{
+    grid-column:1/-1;font-weight:600;color:var(--crimson-dark);font-size:15px;
+    display:none;align-items:center;gap:10px;
+  }
+  .news-msg.show{display:flex;}
+  .news-msg .heart{width:11px;height:11px;color:var(--crimson);}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--crimson-dark);color:var(--rose-tint);}
+  .foot-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;
+    padding:64px 0 48px;
+  }
+  .foot-brand .foot-logo{
+    font-family:var(--kufi);font-weight:700;font-size:30px;color:var(--ivory);
+    display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  }
+  .foot-brand .heart{width:13px;height:13px;color:var(--rose);}
+  .foot-brand p{font-size:14.5px;line-height:2;max-width:38ch;}
+  footer h4{
+    font-family:var(--kufi);font-size:18px;font-weight:700;color:var(--ivory);
+    margin-bottom:20px;display:flex;align-items:center;gap:10px;
+  }
+  footer h4 .heart{width:9px;height:9px;color:var(--rose);}
+  .foot-links a{
+    display:block;font-size:14.5px;padding:7px 0;color:var(--rose-tint);
+    transition:color .15s,padding .15s;
+  }
+  .foot-links a:hover{color:#fff;padding-inline-start:8px;}
+  .socials{display:flex;gap:10px;margin-top:18px;}
+  .socials a{
+    width:42px;height:42px;display:grid;place-items:center;
+    background:var(--crimson);color:var(--ivory);font-size:16px;font-weight:700;
+    font-family:var(--body);
+    transition:background .15s,transform .15s;
+  }
+  .socials a:hover{background:var(--rose);color:var(--crimson-dark);transform:translate(2px,-2px);}
+  .foot-domain{
+    display:inline-block;margin-top:16px;background:var(--crimson);
+    color:var(--ivory);font-weight:600;font-size:13.5px;padding:8px 16px;
+    letter-spacing:.03em;direction:ltr;
+  }
+  .foot-bottom{
+    border-top:2px solid rgba(244,239,223,.18);
+    padding:22px 0;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;font-size:13.5px;
+  }
+  .foot-bottom .pay{display:flex;gap:8px;}
+  .foot-bottom .pay span{
+    background:rgba(244,239,223,.12);padding:5px 12px;font-size:12px;font-weight:600;
+  }
+
+  /* ---------- responsive ---------- */
+  @media(max-width:1024px){
+    .cats{grid-template-columns:repeat(3,1fr);}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+    .hero-grid{grid-template-columns:1fr;gap:52px;}
+    .hero-frame img{height:340px;}
+    .story-grid{grid-template-columns:1fr;gap:44px;}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:40px;}
+    nav.mainnav{display:none;}
+    .burger{display:grid;}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 20px;}
+    .sec{padding:52px 0;}
+    .cats{grid-template-columns:repeat(2,1fr);}
+    .prod-grid{grid-template-columns:1fr;}
+    .brands{grid-template-columns:1fr;}
+    .features{grid-template-columns:1fr;}
+    .story-stats{grid-template-columns:1fr 1fr;}
+    .news-in{grid-template-columns:1fr;}
+    .news-form{min-width:100%;flex-direction:column;}
+    .news-form input{border-inline-end:3px solid var(--crimson);border-bottom:none;}
+    .foot-grid{grid-template-columns:1fr;}
+    .logo-link img{height:52px;}
+    .sec-head{flex-direction:column;align-items:flex-start;}
+    .hero{padding:44px 0 64px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- announcement -->
+<div class="announce">
+  شحن مجاني للطلبات فوق ٢٠٠ ر.س داخل المملكة <span class="heart"></span> كل قطعة تُصنع يدويًا بحب
+</div>
+
+<!-- header -->
+<header>
+  <div class="wrap header-in">
+    <a href="#" class="logo-link" aria-label="صنع بحب — الرئيسية">
+      <img src="logo-final-kufi.png" alt="شعار صنع بحب" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <span class="logo-fallback">صنع بحب</span>
+    </a>
+    <nav class="mainnav" aria-label="التنقل الرئيسي">
+      <a href="#" class="active">الرئيسية</a>
+      <a href="#cats">التصنيفات</a>
+      <a href="#products">المنتجات</a>
+      <a href="#brands">المتاجر</a>
+      <a href="#story">قصتنا</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="بحث">&#9906;</button>
+      <button class="icon-btn" aria-label="المفضلة">&#9825;</button>
+      <button class="icon-btn" aria-label="سلة التسوق" id="cartBtn">&#128717;<span class="cart-count" id="cartCount">2</span></button>
+      <button class="icon-btn burger" aria-label="القائمة" id="burgerBtn">&#9776;</button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#">الرئيسية</a>
+    <a href="#cats">التصنيفات</a>
+    <a href="#products">المنتجات</a>
+    <a href="#brands">المتاجر</a>
+    <a href="#story">قصتنا</a>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hero-eyebrow"><span class="heart"></span> سوق سعودي للمنتجات اليدوية</span>
+      <h1>
+        قطع فريدة،<br>
+        <span class="blk-rose">صُنعت يدويًا</span><br>
+        <span class="blk-crimson">وبكل حب</span>
+      </h1>
+      <p>من شموع تفوح بالدفء إلى فخار يحكي قصة، نجمع لك إبداعات الحرفيين والحرفيات السعوديين في مكان واحد — كل قطعة توقيع، وكل توقيع حكاية.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn btn-crimson">تسوق الآن</a>
+        <a href="#story" class="btn btn-outline">تعرف على صنّاعنا</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-frame">
+        <img src="https://cdn.files.salla.network/homepage/1161127395/f8f80c0b-7046-4183-a952-f09a176a724b.webp" alt="منتجات يدوية من صنع بحب" loading="eager">
+      </div>
+      <div class="hero-tag"><span class="heart"></span> صناعة سعودية ١٠٠٪</div>
+    </div>
+  </div>
+</section>
+
+<!-- categories -->
+<section class="sec" id="cats">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">
+        <span class="sec-block"><span class="heart"></span></span>
+        <h2>تسوق حسب الحرفة</h2>
+      </div>
+      <a href="#" class="sec-link">جميع التصنيفات ←</a>
+    </div>
+    <div class="cats">
+      <a href="#" class="cat"><span class="cat-corner"></span><span class="cat-icon">🕯️</span><h3>شموع وعطور</h3><span class="heart"></span></a>
+      <a href="#" class="cat"><span class="cat-corner"></span><span class="cat-icon">🧶</span><h3>كروشيه</h3><span class="heart"></span></a>
+      <a href="#" class="cat"><span class="cat-corner"></span><span class="cat-icon">🏺</span><h3>فخار وخزف</h3><span class="heart"></span></a>
+      <a href="#" class="cat"><span class="cat-corner"></span><span class="cat-icon">🧺</span><h3>خوص وسلال</h3><span class="heart"></span></a>
+      <a href="#" class="cat"><span class="cat-corner"></span><span class="cat-icon">🎨</span><h3>لوحات فنية</h3><span class="heart"></span></a>
+      <a href="#" class="cat"><span class="cat-corner"></span><span class="cat-icon">🎁</span><h3>هدايا</h3><span class="heart"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- products -->
+<section class="sec" id="products" style="padding-top:16px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">
+        <span class="sec-block" style="background:var(--rose);"><span class="heart"></span></span>
+        <h2>وصل حديثًا</h2>
+      </div>
+      <a href="#" class="sec-link">تصفح كل المنتجات ←</a>
+    </div>
+    <div class="prod-grid">
+      <article class="card">
+        <div class="card-media"><span class="badge">جديد</span>🕯️</div>
+        <div class="card-body">
+          <span class="card-maker"><span class="heart"></span> متجر سلمى</span>
+          <h3>شمعة عود وعنبر — صب يدوي</h3>
+          <div class="card-price-row">
+            <span class="price">٨٩ <small>ر.س</small></span>
+            <button class="add-btn" aria-label="أضف إلى السلة">+</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><span class="badge rose">خصم ٢٠٪</span>🧶</div>
+        <div class="card-body">
+          <span class="card-maker"><span class="heart"></span> دولي</span>
+          <h3>بطانية كروشيه — خيوط قطنية</h3>
+          <div class="card-price-row">
+            <span class="price">١٩٩ <small>ر.س</small><span class="old-price">٢٤٩ ر.س</span></span>
+            <button class="add-btn" aria-label="أضف إلى السلة">+</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><span class="badge">الأكثر مبيعًا</span>🏺</div>
+        <div class="card-body">
+          <span class="card-maker"><span class="heart"></span> نور</span>
+          <h3>مزهرية خزف مزججة — تشكيل يدوي</h3>
+          <div class="card-price-row">
+            <span class="price">١٤٥ <small>ر.س</small></span>
+            <button class="add-btn" aria-label="أضف إلى السلة">+</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><span class="badge rose">قطعة واحدة</span>🎨</div>
+        <div class="card-body">
+          <span class="card-maker"><span class="heart"></span> متجر سلمى</span>
+          <h3>لوحة تجريدية — ألوان أكريليك</h3>
+          <div class="card-price-row">
+            <span class="price">٣٢٠ <small>ر.س</small></span>
+            <button class="add-btn" aria-label="أضف إلى السلة">+</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- brands -->
+<section class="sec brands-sec" id="brands">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">
+        <span class="sec-block"><span class="heart"></span></span>
+        <h2>متاجرنا الموثوقة</h2>
+      </div>
+      <a href="#" class="sec-link">كل المتاجر ←</a>
+    </div>
+    <div class="brands">
+      <a href="#" class="brand">
+        <img class="brand-logo" src="https://cdn.files.salla.network/brands/1161127395/7cb2db59-859a-45fa-9ef9-666d85cada9b_900x900.webp" alt="شعار متجر سلمى" loading="lazy">
+        <h3>متجر سلمى</h3>
+        <p>شموع وعطور منزلية تُصب وتُعطّر يدويًا بخامات طبيعية.</p>
+        <span class="brand-cta"><span class="heart"></span> زيارة المتجر</span>
+      </a>
+      <a href="#" class="brand">
+        <img class="brand-logo" src="https://cdn.salla.sa/RABaNP/PELESVNJk0Vbdv2AlMI6YMh174CjTr1QBondyjL2.png" alt="شعار دولي" loading="lazy">
+        <h3>دولي — Dolly's</h3>
+        <p>أعمال كروشيه وحياكة بلمسة عصرية وألوان مبهجة.</p>
+        <span class="brand-cta"><span class="heart"></span> زيارة المتجر</span>
+      </a>
+      <a href="#" class="brand">
+        <img class="brand-logo" src="https://cdn.salla.sa/RABaNP/brands/2BsviGrAGVzhU1ygjTM9srAypnjAzMrAReDv0Fua.png" alt="شعار نور" loading="lazy">
+        <h3>نور</h3>
+        <p>فخار وخزف مشغول على العجلة بروح سعودية معاصرة.</p>
+        <span class="brand-cta"><span class="heart"></span> زيارة المتجر</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- maker story -->
+<section class="sec story" id="story">
+  <div class="story-strips" aria-hidden="true">
+    <span style="top:8%;inset-inline-start:-90px;background:var(--rose);"></span>
+    <span style="top:38%;inset-inline-start:-130px;background:var(--crimson-dark);"></span>
+    <span style="top:68%;inset-inline-start:-90px;background:var(--rose-tint);opacity:.5;"></span>
+  </div>
+  <div class="wrap story-grid">
+    <div>
+      <h2>خلف كل قطعة<br><span class="mark">يد تحكي قصتها</span></h2>
+      <p>بدأنا «صنع بحب» لنمنح الحرفيين والحرفيات في المملكة منصة تليق بإبداعهم. نختار كل صانع بعناية، ونوثّق رحلة كل قطعة من الورشة حتى باب بيتك — لأن المصنوع باليد لا يشبه غيره.</p>
+      <a href="#" class="btn btn-ivory">اقرأ قصص الصنّاع</a>
+    </div>
+    <div class="story-stats">
+      <div class="stat"><b>+١٢٠</b><span>صانع وصانعة</span></div>
+      <div class="stat"><b>+٣٥٠٠</b><span>قطعة يدوية</span></div>
+      <div class="stat"><b>١٣</b><span>مدينة سعودية</span></div>
+      <div class="stat"><b>٩٨٪</b><span>رضا العملاء</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- features -->
+<section class="sec">
+  <div class="wrap">
+    <div class="features">
+      <div class="feature">
+        <span class="f-icon">🛡️</span>
+        <h3>تسوق آمن</h3>
+        <p>دفع مشفّر وحماية كاملة لبياناتك، مع ضمان استرجاع خلال ١٤ يومًا.</p>
+      </div>
+      <div class="feature">
+        <span class="f-icon">💬</span>
+        <h3>خدمة العملاء</h3>
+        <p>فريقنا معك على مدار الأسبوع للإجابة عن استفساراتك ومتابعة طلبك.</p>
+      </div>
+      <div class="feature">
+        <span class="f-icon">🚚</span>
+        <h3>شحن سريع</h3>
+        <p>توصيل لجميع مدن المملكة خلال ٢–٥ أيام عمل مع تغليف يحمي كل قطعة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- newsletter -->
+<section class="newsletter">
+  <div class="wrap news-in">
+    <div>
+      <h2>اشترك واحصل على <span class="disc">خصم ١٠٪</span></h2>
+      <p>كن أول من يعرف عن القطع الجديدة وقصص الصنّاع والعروض الخاصة.</p>
+    </div>
+    <form class="news-form" id="newsForm">
+      <input type="email" id="newsEmail" placeholder="بريدك الإلكتروني" aria-label="البريد الإلكتروني" required>
+      <button type="submit">اشترك</button>
+    </form>
+    <div class="news-msg" id="newsMsg"><span class="heart"></span> شكرًا لك! كود الخصم في طريقه إلى بريدك.</div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logo">صنع بحب <span class="heart"></span></div>
+        <p>سوق سعودي يجمع أجمل ما تصنعه الأيادي المحلية — شموع، كروشيه، فخار، خوص، ولوحات فنية. كل قطعة تحمل توقيع صانعها وقصته.</p>
+        <span class="foot-domain">9n3b7b.com</span>
+        <div class="socials">
+          <a href="#" aria-label="إنستغرام">IG</a>
+          <a href="#" aria-label="إكس">X</a>
+          <a href="#" aria-label="تيك توك">TT</a>
+          <a href="#" aria-label="سناب شات">SC</a>
+        </div>
+      </div>
+      <div>
+        <h4><span class="heart"></span> التسوق</h4>
+        <div class="foot-links">
+          <a href="#cats">شموع وعطور</a>
+          <a href="#cats">كروشيه</a>
+          <a href="#cats">فخار وخزف</a>
+          <a href="#cats">خوص وسلال</a>
+          <a href="#cats">لوحات فنية</a>
+          <a href="#cats">هدايا</a>
+        </div>
+      </div>
+      <div>
+        <h4><span class="heart"></span> عن المنصة</h4>
+        <div class="foot-links">
+          <a href="#story">قصتنا</a>
+          <a href="#brands">متاجرنا</a>
+          <a href="#">انضم كصانع</a>
+          <a href="#">المدونة</a>
+          <a href="#">الوظائف</a>
+        </div>
+      </div>
+      <div>
+        <h4><span class="heart"></span> المساعدة</h4>
+        <div class="foot-links">
+          <a href="#">الأسئلة الشائعة</a>
+          <a href="#">الشحن والتوصيل</a>
+          <a href="#">الاسترجاع والاستبدال</a>
+          <a href="#">سياسة الخصوصية</a>
+          <a href="#">تواصل معنا</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© ٢٠٢٦ صنع بحب — جميع الحقوق محفوظة</span>
+      <div class="pay">
+        <span>مدى</span><span>Visa</span><span>Apple Pay</span><span>Tabby</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  var burger = document.getElementById('burgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', function(){
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
+  });
+
+  // cart counter (mock)
+  var count = 2;
+  var cartCount = document.getElementById('cartCount');
+  var arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  function toArabic(n){ return String(n).replace(/\d/g, function(d){ return arabicDigits[d]; }); }
+  cartCount.textContent = toArabic(count);
+  document.querySelectorAll('.add-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      count++;
+      cartCount.textContent = toArabic(count);
+      btn.textContent = '✓';
+      setTimeout(function(){ btn.textContent = '+'; }, 900);
+    });
+  });
+
+  // newsletter (mock)
+  document.getElementById('newsForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('newsEmail').value.trim();
+    if(!email) return;
+    document.getElementById('newsMsg').classList.add('show');
+    this.reset();
+  });
+</script>
+</body>
+</html>
