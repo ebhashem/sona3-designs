@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صنع بحب — بازار الحب | سوق المنتجات اليدوية السعودية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   بازار الحب — Love Bazaar · paper-collage editorial
+   صنع بحب · 9n3b7b.com
+   ============================================================ */
+:root{
+  --ivory:#F4EFDF;
+  --ivory-deep:#EDE6D0;
+  --paper:#FFFDF6;
+  --rose:#D2A0A0;
+  --rose-soft:#EBD2D2;
+  --crimson:#972C2E;
+  --crimson-deep:#7C2224;
+  --mint:#7FD6BE;
+  --mint-soft:#D8F2EA;
+  --mustard:#E6B33E;
+  --mustard-soft:#F7E7C0;
+  --sky:#79B4D9;
+  --sky-soft:#DCEBF5;
+  --coral:#EF7B62;
+  --coral-soft:#FBDDD5;
+  --ink:#3E2A2B;
+  --ink-soft:#7A6465;
+  --kufi:'Reem Kufi',sans-serif;
+  --body:'IBM Plex Sans Arabic',sans-serif;
+  --shadow-card:0 10px 24px rgba(62,42,43,.10);
+  --shadow-pop:0 18px 44px rgba(62,42,43,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--ivory);
+  color:var(--ink);
+  overflow-x:hidden;
+  line-height:1.7;
+}
+/* subtle paper grain */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:radial-gradient(rgba(151,44,46,.028) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+::selection{background:var(--mustard);color:var(--crimson-deep)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:24px;position:relative;z-index:1}
+
+h1,h2,h3,.kufi{font-family:var(--kufi)}
+
+/* ---------- reveal on scroll ---------- */
+.rv{opacity:0;transform:translateY(26px) rotate(var(--r,0deg));transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1.1)}
+.rv.in{opacity:1;transform:translateY(0) rotate(var(--r,0deg))}
+
+/* ============ announcement bar ============ */
+.bar{
+  background:var(--crimson);color:var(--ivory);
+  font-size:.83rem;font-weight:500;overflow:hidden;position:relative;z-index:60;
+}
+.bar .track{display:flex;width:max-content;animation:marquee 30s linear infinite}
+.bar:hover .track{animation-play-state:paused}
+.bar span{display:inline-flex;align-items:center;gap:.55em;padding:.55em 1.6em;white-space:nowrap;letter-spacing:.02em}
+.bar .hb{color:var(--rose);font-size:.9em}
+@keyframes marquee{to{transform:translateX(50%)}}
+
+/* ============ header ============ */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(244,239,223,.92);backdrop-filter:blur(10px);
+  border-bottom:2px dashed rgba(151,44,46,.25);
+}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:58px;width:auto;border-radius:14px;box-shadow:0 4px 12px rgba(151,44,46,.14);transform:rotate(-2deg);transition:transform .35s}
+.brand:hover img{transform:rotate(2deg) scale(1.04)}
+.brand .tag{font-size:.72rem;color:var(--ink-soft);letter-spacing:.05em}
+.brand .nm{font-family:var(--kufi);font-size:1.05rem;font-weight:700;color:var(--crimson);line-height:1.2}
+nav.main{display:flex;gap:6px}
+nav.main a{
+  font-weight:600;font-size:.95rem;padding:.45em 1em;border-radius:999px;position:relative;transition:.25s;
+}
+nav.main a:hover{background:var(--paper);box-shadow:var(--shadow-card);color:var(--crimson)}
+nav.main a.hot{color:var(--crimson)}
+.hd-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+  background:var(--paper);box-shadow:var(--shadow-card);font-size:1.15rem;transition:.25s;position:relative;
+}
+.icon-btn:hover{transform:translateY(-3px) rotate(-4deg);box-shadow:var(--shadow-pop)}
+.cart-btn{background:var(--crimson);color:var(--ivory)}
+.cart-count{
+  position:absolute;top:-7px;inset-inline-start:-7px;min-width:22px;height:22px;padding-inline:5px;
+  background:var(--mustard);color:var(--crimson-deep);font-weight:700;font-size:.75rem;
+  border-radius:999px;display:grid;place-items:center;border:2px solid var(--ivory);
+  transition:transform .3s cubic-bezier(.3,1.6,.5,1);
+}
+.cart-count.bump{transform:scale(1.45)}
+.burger{display:none}
+.m-nav{display:none}
+
+/* ============ shared collage bits ============ */
+.tape{
+  position:absolute;width:96px;height:30px;opacity:.9;z-index:5;
+  background:repeating-linear-gradient(45deg,var(--tp,var(--mustard)) 0 9px,color-mix(in srgb,var(--tp,var(--mustard)) 78%,#fff) 9px 18px);
+  box-shadow:0 2px 5px rgba(62,42,43,.14);
+  -webkit-mask:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+          mask:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+}
+.heart-divider{display:flex;align-items:center;justify-content:center;gap:14px;padding-block:8px}
+.heart-divider i{width:9px;height:9px;border-radius:50%;background:var(--rose)}
+.heart-divider b{color:var(--crimson);font-size:1.5rem;font-style:normal;line-height:1;transform:translateY(-2px)}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 46px}
+.sec-kicker{
+  display:inline-block;font-weight:700;font-size:.82rem;letter-spacing:.06em;
+  background:var(--paper);color:var(--crimson);padding:.4em 1.3em;border-radius:999px;
+  box-shadow:var(--shadow-card);transform:rotate(-1.5deg);margin-bottom:16px;
+}
+.sec-title{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:700;color:var(--crimson-deep);line-height:1.35}
+.sec-sub{color:var(--ink-soft);margin-top:10px;font-size:.98rem}
+
+/* floating hearts confetti */
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.confetti i{
+  position:absolute;font-style:normal;opacity:.5;
+  animation:floaty var(--d,9s) ease-in-out infinite alternate;
+  font-size:var(--s,1rem);
+}
+@keyframes floaty{
+  from{transform:translateY(0) rotate(-8deg)}
+  to{transform:translateY(-26px) rotate(10deg)}
+}
+
+/* ============ hero ============ */
+.hero{position:relative;padding:64px 0 96px;overflow:hidden}
+.hero .blob{position:absolute;z-index:0;opacity:.9}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative;z-index:2}
+.hero-copy .stamp{
+  display:inline-flex;align-items:center;gap:.5em;background:var(--mint);color:var(--crimson-deep);
+  font-weight:700;font-size:.85rem;padding:.45em 1.3em;border-radius:999px;transform:rotate(2deg);
+  box-shadow:var(--shadow-card);margin-bottom:22px;
+}
+.hero-title{
+  font-size:clamp(2.5rem,6vw,4.3rem);font-weight:700;line-height:1.35;color:var(--crimson-deep);
+}
+.hero-title .mark{
+  position:relative;display:inline-block;color:var(--crimson);
+}
+.hero-title .mark::after{
+  content:"";position:absolute;inset-inline:-4%;bottom:.12em;height:.34em;z-index:-1;
+  background:var(--mustard);border-radius:3px 12px 4px 10px;transform:rotate(-1.2deg);
+}
+.hero-title .mark2{position:relative;display:inline-block}
+.hero-title .mark2::after{
+  content:"";position:absolute;inset-inline:-3%;bottom:.1em;height:.34em;z-index:-1;
+  background:var(--mint);border-radius:10px 3px 12px 5px;transform:rotate(1deg);
+}
+.hero-lead{color:var(--ink-soft);font-size:1.06rem;max-width:46ch;margin-top:20px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;font-weight:700;font-size:1rem;
+  padding:.85em 2em;border-radius:18px 22px 16px 24px;transition:.3s;position:relative;
+}
+.btn-main{background:var(--crimson);color:var(--ivory);box-shadow:0 10px 24px rgba(151,44,46,.35)}
+.btn-main:hover{transform:translateY(-4px) rotate(-1deg);box-shadow:0 16px 34px rgba(151,44,46,.42)}
+.btn-ghost{background:var(--paper);color:var(--crimson);box-shadow:var(--shadow-card)}
+.btn-ghost:hover{transform:translateY(-4px) rotate(1deg);box-shadow:var(--shadow-pop)}
+.hero-meta{display:flex;gap:26px;margin-top:40px;flex-wrap:wrap}
+.hero-meta .hm{transform:rotate(var(--r,0deg))}
+.hero-meta b{font-family:var(--kufi);display:block;font-size:1.5rem;color:var(--crimson)}
+.hero-meta span{font-size:.82rem;color:var(--ink-soft)}
+
+/* hero collage side */
+.hero-collage{position:relative;min-height:480px}
+.h-shape{position:absolute;z-index:0}
+.hero-photo{
+  position:absolute;inset-inline-end:8%;top:6%;width:78%;z-index:3;
+  background:var(--paper);padding:14px 14px 18px;
+  border-radius:6px 14px 8px 16px;
+  box-shadow:var(--shadow-pop);
+  transform:rotate(-3.5deg);
+  transition:transform .5s cubic-bezier(.3,1.4,.5,1);
+}
+.hero-photo:hover{transform:rotate(-1deg) scale(1.02)}
+.hero-photo img{border-radius:4px 10px 6px 12px;aspect-ratio:4/3;object-fit:cover;width:100%}
+.hero-photo figcaption{font-size:.82rem;text-align:center;padding-top:10px;color:var(--ink-soft);font-weight:500}
+.h-card{
+  position:absolute;z-index:4;background:var(--paper);box-shadow:var(--shadow-pop);
+  padding:12px 18px;border-radius:14px 20px 12px 18px;display:flex;align-items:center;gap:10px;
+  font-weight:700;font-size:.88rem;color:var(--crimson-deep);
+  animation:bob 5s ease-in-out infinite alternate;
+}
+.h-card .em{font-size:1.4rem}
+@keyframes bob{from{transform:translateY(0) rotate(var(--r,3deg))}to{transform:translateY(-12px) rotate(var(--r,3deg))}}
+.h-card.c1{--r:4deg;bottom:14%;inset-inline-start:0}
+.h-card.c2{--r:-5deg;top:2%;inset-inline-start:6%;animation-delay:1.2s}
+.h-card.c3{--r:3deg;bottom:-2%;inset-inline-end:4%;animation-delay:2.1s;background:var(--mustard-soft)}
+.hero-logo-cut{
+  position:absolute;z-index:5;inset-inline-start:-2%;top:38%;width:150px;
+  background:var(--paper);padding:10px;transform:rotate(6deg);
+  border-radius:12px 18px 10px 20px;box-shadow:var(--shadow-pop);
+  animation:bob 6s ease-in-out infinite alternate;animation-delay:.6s;--r:6deg;
+}
+.hero-logo-cut img{border-radius:8px}
+
+/* torn wave edge between sections */
+.torn{display:block;width:100%;height:60px;margin-bottom:-2px}
+
+/* ============ categories ============ */
+.cats{position:relative;padding:70px 0 80px;background:var(--paper)}
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.cat{
+  text-align:center;padding:30px 12px 24px;border-radius:24px 30px 22px 32px;position:relative;
+  background:var(--cbg);transition:.35s cubic-bezier(.3,1.3,.5,1);transform:rotate(var(--r,0deg));
+  box-shadow:var(--shadow-card);
+}
+.cat:hover{transform:rotate(0deg) translateY(-8px) scale(1.04);box-shadow:var(--shadow-pop)}
+.cat .blobem{
+  width:74px;height:74px;margin:0 auto 14px;display:grid;place-items:center;font-size:2rem;
+  background:var(--paper);border-radius:46% 54% 58% 42%/52% 44% 56% 48%;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.7),0 6px 14px rgba(62,42,43,.12);
+  transition:.4s;
+}
+.cat:hover .blobem{border-radius:54% 46% 42% 58%/46% 56% 44% 52%;transform:rotate(-8deg)}
+.cat h3{font-size:1.02rem;font-weight:700;color:var(--crimson-deep)}
+.cat span{font-size:.76rem;color:var(--ink-soft);font-weight:500}
+.cat .mini-tape{position:absolute;top:-12px;inset-inline-start:50%;translate:50% 0;width:58px;height:20px}
+
+/* ============ products ============ */
+.prods{position:relative;padding:76px 0 90px}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.prod{
+  background:var(--paper);padding:14px 14px 18px;border-radius:8px 14px 6px 16px;
+  box-shadow:var(--shadow-card);position:relative;transform:rotate(var(--r,0deg));
+  transition:.4s cubic-bezier(.3,1.3,.5,1);
+}
+.prod:hover{transform:rotate(0deg) translateY(-10px);box-shadow:var(--shadow-pop)}
+.prod .ph{
+  aspect-ratio:1/1.05;border-radius:6px 10px 5px 12px;display:grid;place-items:center;
+  font-size:4.2rem;background:var(--pbg,var(--ivory));position:relative;overflow:hidden;
+}
+.prod .ph::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.55),transparent 55%);
+}
+.prod .ph .em{transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.prod:hover .ph .em{transform:scale(1.18) rotate(-6deg)}
+.badge{
+  position:absolute;top:22px;inset-inline-start:-10px;z-index:3;
+  font-size:.72rem;font-weight:700;color:#fff;padding:.35em 1em;
+  background:var(--bg,var(--coral));border-radius:4px 999px 999px 4px;
+  box-shadow:0 4px 10px rgba(62,42,43,.2);transform:rotate(-4deg);
+}
+.prod .info{padding:14px 4px 0;text-align:center}
+.prod .maker{font-size:.74rem;font-weight:600;color:var(--ink-soft)}
+.prod h3{font-size:1.02rem;font-weight:700;margin:.15em 0 .3em;color:var(--ink)}
+.price{font-family:var(--kufi);font-weight:700;color:var(--crimson);font-size:1.12rem}
+.price .old{font-size:.8rem;color:var(--ink-soft);text-decoration:line-through;font-weight:500;margin-inline-start:.5em}
+.price small{font-size:.68em}
+.add-btn{
+  margin-top:12px;width:100%;padding:.65em;border-radius:12px 16px 10px 18px;font-weight:700;font-size:.9rem;
+  background:var(--ivory);color:var(--crimson);border:2px dashed var(--rose);transition:.3s;
+}
+.add-btn:hover{background:var(--crimson);color:var(--ivory);border-color:var(--crimson);transform:rotate(-1deg)}
+.prods .more{text-align:center;margin-top:46px}
+
+/* ============ brands ============ */
+.brands{position:relative;padding:74px 0 84px;background:var(--rose-soft);overflow:hidden}
+.brand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;max-width:920px;margin-inline:auto}
+.bcard{
+  background:var(--paper);border-radius:10px 16px 8px 18px;padding:30px 24px 26px;text-align:center;
+  box-shadow:var(--shadow-card);position:relative;transform:rotate(var(--r,0deg));
+  transition:.4s cubic-bezier(.3,1.3,.5,1);
+}
+.bcard:hover{transform:rotate(0) translateY(-8px);box-shadow:var(--shadow-pop)}
+.bcard img{width:104px;height:104px;object-fit:cover;border-radius:50%;margin:0 auto 16px;
+  border:4px solid var(--ivory);box-shadow:0 6px 16px rgba(62,42,43,.14)}
+.bcard h3{color:var(--crimson-deep);font-size:1.15rem;margin-bottom:4px}
+.bcard p{font-size:.84rem;color:var(--ink-soft)}
+.bcard .visit{
+  display:inline-block;margin-top:14px;font-weight:700;font-size:.85rem;color:var(--crimson);
+  border-bottom:2px dotted var(--rose);padding-bottom:2px;transition:.25s;
+}
+.bcard:hover .visit{color:var(--coral);border-color:var(--coral)}
+
+/* ============ story ============ */
+.story{position:relative;padding:90px 0;overflow:hidden}
+.story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.story-art{position:relative;min-height:400px}
+.story-art .sp{
+  position:absolute;display:grid;place-items:center;font-size:3rem;
+  box-shadow:var(--shadow-card);animation:bob 6s ease-in-out infinite alternate;
+}
+.sp.p1{width:170px;height:170px;background:var(--mint);border-radius:52% 48% 44% 56%/48% 54% 46% 52%;top:4%;inset-inline-start:8%;--r:-4deg}
+.sp.p2{width:150px;height:150px;background:var(--mustard);border-radius:44% 56% 52% 48%/56% 44% 56% 44%;top:34%;inset-inline-end:6%;--r:5deg;animation-delay:1s}
+.sp.p3{width:140px;height:140px;background:var(--sky);border-radius:56% 44% 48% 52%/44% 56% 44% 56%;bottom:2%;inset-inline-start:20%;--r:3deg;animation-delay:2s}
+.sp.p4{width:96px;height:96px;background:var(--coral);border-radius:48% 52% 56% 44%/52% 48% 52% 48%;top:12%;inset-inline-end:24%;font-size:2rem;--r:-6deg;animation-delay:.5s}
+.story-quote{
+  position:absolute;bottom:14%;inset-inline-end:12%;background:var(--paper);z-index:3;
+  padding:16px 22px;border-radius:16px 22px 4px 20px;box-shadow:var(--shadow-pop);
+  font-family:var(--kufi);font-weight:600;color:var(--crimson);font-size:1rem;transform:rotate(-2deg);max-width:220px;
+}
+.story-copy .sec-kicker{transform:rotate(1.5deg)}
+.story-copy h2{font-size:clamp(1.7rem,3.6vw,2.4rem);color:var(--crimson-deep);line-height:1.4;margin-bottom:18px}
+.story-copy p{color:var(--ink-soft);margin-bottom:14px;max-width:56ch}
+.story-points{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.story-points li{list-style:none;display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.story-points .dot{
+  flex:none;width:30px;height:30px;border-radius:46% 54% 52% 48%/54% 46% 54% 46%;
+  display:grid;place-items:center;font-size:.85rem;color:var(--crimson-deep);margin-top:2px;
+}
+
+/* ============ features ============ */
+.feats{padding:70px 0 80px;background:var(--paper);position:relative}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.feat{
+  text-align:center;padding:32px 20px;border-radius:22px 28px 20px 30px;position:relative;
+  background:var(--fbg);transform:rotate(var(--r,0deg));transition:.35s;box-shadow:var(--shadow-card);
+}
+.feat:hover{transform:rotate(0) translateY(-6px);box-shadow:var(--shadow-pop)}
+.feat .fi{font-size:2.3rem;display:block;margin-bottom:12px}
+.feat h3{font-size:1.05rem;color:var(--crimson-deep);margin-bottom:6px}
+.feat p{font-size:.84rem;color:var(--ink-soft)}
+
+/* ============ newsletter ============ */
+.news{position:relative;padding:90px 0;overflow:hidden}
+.news-card{
+  position:relative;max-width:800px;margin-inline:auto;text-align:center;
+  background:var(--paper);padding:64px 40px 56px;border-radius:16px 26px 14px 28px;
+  box-shadow:var(--shadow-pop);
+}
+.news-card::before{
+  content:"";position:absolute;inset:14px;border:2px dashed var(--rose);
+  border-radius:12px 20px 10px 22px;pointer-events:none;
+}
+.news-card .disc{
+  display:inline-block;font-family:var(--kufi);font-weight:700;font-size:1rem;
+  background:var(--mustard);color:var(--crimson-deep);padding:.5em 1.4em;border-radius:999px;
+  transform:rotate(-2deg);box-shadow:var(--shadow-card);margin-bottom:18px;
+}
+.news-card h2{font-size:clamp(1.6rem,3.4vw,2.3rem);color:var(--crimson-deep);margin-bottom:10px}
+.news-card p{color:var(--ink-soft);max-width:44ch;margin:0 auto 28px}
+.news-form{display:flex;gap:12px;max-width:480px;margin-inline:auto;position:relative;z-index:2}
+.news-form input{
+  flex:1;font-family:var(--body);font-size:.95rem;padding:.9em 1.4em;border-radius:16px 20px 14px 22px;
+  border:2px solid var(--ivory-deep);background:var(--ivory);color:var(--ink);outline:none;transition:.25s;
+}
+.news-form input:focus{border-color:var(--rose);background:#fff}
+.news-form input::placeholder{color:var(--ink-soft)}
+.news-msg{margin-top:16px;font-weight:700;color:var(--crimson);min-height:1.6em;font-size:.92rem}
+
+/* ============ footer ============ */
+footer{background:var(--crimson-deep);color:var(--rose-soft);position:relative}
+.ft-top{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;padding:64px 0 44px}
+.ft-brand img{height:64px;border-radius:14px;transform:rotate(-2deg);margin-bottom:16px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.ft-brand p{font-size:.88rem;max-width:32ch;opacity:.85}
+.ft-social{display:flex;gap:10px;margin-top:18px}
+.ft-social a{
+  width:40px;height:40px;border-radius:12px 14px 10px 16px;display:grid;place-items:center;
+  background:rgba(244,239,223,.1);font-size:1rem;transition:.3s;
+}
+.ft-social a:hover{background:var(--rose);color:var(--crimson-deep);transform:rotate(-6deg) translateY(-3px)}
+footer h4{font-family:var(--kufi);color:var(--ivory);font-size:1.05rem;margin-bottom:16px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:9px;font-size:.9rem}
+.ft-links a{opacity:.82;transition:.25s;display:inline-flex;gap:.5em;align-items:center}
+.ft-links a:hover{opacity:1;color:var(--mustard);transform:translateX(-4px)}
+.ft-bottom{
+  border-top:1px dashed rgba(244,239,223,.25);padding:20px 0;display:flex;flex-wrap:wrap;gap:10px;
+  align-items:center;justify-content:space-between;font-size:.8rem;opacity:.8;
+}
+.ft-bottom .luv{color:var(--rose)}
+
+/* ============ toast ============ */
+.toast{
+  position:fixed;bottom:26px;inset-inline-start:26px;z-index:100;
+  background:var(--paper);color:var(--crimson-deep);font-weight:700;font-size:.92rem;
+  padding:14px 22px;border-radius:14px 20px 12px 22px;box-shadow:var(--shadow-pop);
+  display:flex;align-items:center;gap:10px;
+  transform:translateY(120%) rotate(-2deg);opacity:0;transition:.45s cubic-bezier(.3,1.3,.5,1);
+  border:2px dashed var(--rose);pointer-events:none;
+}
+.toast.show{transform:translateY(0) rotate(-2deg);opacity:1}
+
+/* ============ responsive ============ */
+@media (max-width:1020px){
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .feat-grid{grid-template-columns:repeat(2,1fr)}
+  .ft-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:880px){
+  nav.main{display:none}
+  .burger{display:grid}
+  .m-nav{
+    display:flex;flex-direction:column;gap:4px;overflow:hidden;max-height:0;transition:max-height .45s ease;
+    background:var(--paper);border-radius:0 0 22px 22px;box-shadow:var(--shadow-card);
+  }
+  .m-nav.open{max-height:400px}
+  .m-nav a{padding:.9em 1.6em;font-weight:600;border-bottom:1px dashed var(--ivory-deep)}
+  .m-nav a:last-child{border-bottom:none}
+  .hero-grid{grid-template-columns:1fr;gap:26px}
+  .hero{padding-top:40px}
+  .hero-collage{min-height:420px;margin-top:16px}
+  .story-grid{grid-template-columns:1fr;gap:30px}
+  .story-art{min-height:340px}
+  .brand-grid{grid-template-columns:1fr;max-width:380px}
+}
+@media (max-width:560px){
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .prod-grid{grid-template-columns:1fr;max-width:340px;margin-inline:auto}
+  .feat-grid{grid-template-columns:1fr}
+  .ft-top{grid-template-columns:1fr;gap:30px}
+  .news-form{flex-direction:column}
+  .hero-logo-cut{width:110px}
+  .brand img{height:48px}
+  .hero-collage{min-height:360px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ======== announcement bar ======== -->
+<div class="bar" role="status">
+  <div class="track" id="marquee">
+    <span><i class="hb">♥</i> شحن مجاني للطلبات فوق ٢٠٠ ر.س</span>
+    <span><i class="hb">♥</i> كل قطعة تُصنع بحب على يد حرفيات سعوديات</span>
+    <span><i class="hb">♥</i> خصم ١٠٪ على طلبك الأول — اشترك في النشرة</span>
+    <span><i class="hb">♥</i> تغليف هدايا مجاني عند الطلب</span>
+  </div>
+</div>
+
+<!-- ======== header ======== -->
+<header>
+  <div class="wrap">
+    <div class="hd">
+      <a class="brand" href="#" aria-label="صنع بحب — الصفحة الرئيسية">
+        <img src="logo-final-kufi.png" alt="شعار صنع بحب">
+        <span>
+          <span class="nm">صنع بحب</span>
+          <span class="tag">بازار الحرف اليدوية · 9n3b7b.com</span>
+        </span>
+      </a>
+      <nav class="main" aria-label="القائمة الرئيسية">
+        <a href="#" class="hot">الرئيسية</a>
+        <a href="#cats">الأقسام</a>
+        <a href="#prods">الجديد</a>
+        <a href="#brands">متاجرنا</a>
+        <a href="#story">قصتنا</a>
+        <a href="#news">تواصل</a>
+      </nav>
+      <div class="hd-actions">
+        <button class="icon-btn" aria-label="بحث">🔍</button>
+        <button class="icon-btn" aria-label="المفضلة">🤍</button>
+        <button class="icon-btn cart-btn" id="cartBtn" aria-label="سلة التسوق">
+          🧺
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn burger" id="burger" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </div>
+  <nav class="m-nav" id="mNav" aria-label="قائمة الجوال">
+    <a href="#">الرئيسية</a>
+    <a href="#cats">الأقسام</a>
+    <a href="#prods">الجديد</a>
+    <a href="#brands">متاجرنا</a>
+    <a href="#story">قصتنا</a>
+    <a href="#news">تواصل</a>
+  </nav>
+</header>
+
+<!-- ======== hero ======== -->
+<section class="hero">
+  <!-- background paper blobs -->
+  <svg class="blob" style="top:-80px;inset-inline-end:-120px;width:520px" viewBox="0 0 200 200" aria-hidden="true">
+    <path fill="#EBD2D2" d="M45.7,-58.8C58.9,-49.6,69.2,-35.5,73.4,-19.5C77.5,-3.4,75.6,14.7,67.6,29.2C59.6,43.7,45.6,54.7,30.2,61.6C14.8,68.5,-2,71.4,-18.6,68C-35.2,64.6,-51.5,55,-61.1,40.7C-70.7,26.4,-73.5,7.4,-70.3,-9.9C-67.2,-27.3,-58.2,-43,-45.2,-52.3C-32.2,-61.6,-16.1,-64.5,0.3,-64.9C16.8,-65.3,33.5,-63.2,45.7,-58.8Z" transform="translate(100 100)"/>
+  </svg>
+  <svg class="blob" style="bottom:-140px;inset-inline-start:-160px;width:480px" viewBox="0 0 200 200" aria-hidden="true">
+    <path fill="#D8F2EA" d="M39.9,-51.1C52.3,-42.6,63.5,-31.2,68.6,-17C73.7,-2.8,72.6,14.2,65.3,27.7C58,41.3,44.4,51.5,29.8,58.2C15.2,64.8,-0.5,68,-16.4,65C-32.3,62,-48.4,52.9,-58.1,39.3C-67.8,25.6,-71.1,7.5,-68,-9.2C-64.9,-25.9,-55.4,-41.1,-42.4,-49.7C-29.5,-58.3,-13.1,-60.2,0.9,-61.3C14.8,-62.4,27.5,-59.6,39.9,-51.1Z" transform="translate(100 100)"/>
+  </svg>
+  <div class="confetti" aria-hidden="true">
+    <i style="top:12%;inset-inline-start:6%;--s:1.3rem;--d:7s">🩷</i>
+    <i style="top:66%;inset-inline-start:44%;--s:.9rem;--d:9s">❤️</i>
+    <i style="top:24%;inset-inline-start:52%;--s:1rem;--d:11s">🧡</i>
+    <i style="top:82%;inset-inline-start:12%;--s:1.1rem;--d:8s">💛</i>
+    <i style="top:8%;inset-inline-end:30%;--s:.85rem;--d:10s">🩵</i>
+    <i style="top:48%;inset-inline-start:2%;--s:.8rem;--d:12s">🤎</i>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy rv">
+        <span class="stamp">✂️ سوق يدوي ١٠٠٪ سعودي</span>
+        <h1 class="hero-title">
+          كل قطعة هنا<br>
+          <span class="mark">قصّت</span> ولُوّنت<br>
+          و<span class="mark2">صُنعت بحب</span>
+        </h1>
+        <p class="hero-lead">
+          بازار الحب يجمع لك أجمل ما تصنعه أنامل الحرفيات السعوديات — شموع تفوح دفئًا،
+          كروشيه ينسج الحكايات، وفخار يحمل بصمة يدٍ لا تتكرر.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-main" href="#prods">تسوّقي البازار 🧺</a>
+          <a class="btn btn-ghost" href="#story">قصتنا ♥</a>
+        </div>
+        <div class="hero-meta">
+          <div class="hm" style="--r:-2deg"><b>+١٢٠</b><span>حرفية مبدعة</span></div>
+          <div class="hm" style="--r:1.5deg"><b>+٢٤٠٠</b><span>قطعة يدوية</span></div>
+          <div class="hm" style="--r:-1deg"><b>٤.٩ ★</b><span>تقييم عملائنا</span></div>
+        </div>
+      </div>
+
+      <div class="hero-collage rv">
+        <svg class="h-shape" style="top:-6%;inset-inline-end:-8%;width:340px" viewBox="0 0 200 200" aria-hidden="true">
+          <path fill="#F7E7C0" d="M42.2,-56.2C55.9,-47.5,68.9,-36.2,73.9,-21.9C78.9,-7.6,75.9,9.7,68.3,24.3C60.6,38.9,48.2,50.8,34,58.5C19.8,66.2,3.8,69.6,-12.3,68C-28.4,66.3,-44.7,59.5,-55.6,47.5C-66.5,35.5,-72,18.2,-71.5,1.3C-71,-15.7,-64.5,-31.3,-53.5,-40.4C-42.5,-49.5,-27,-52,-12.9,-56.9C1.2,-61.7,28.5,-64.9,42.2,-56.2Z" transform="translate(100 100)"/>
+        </svg>
+        <svg class="h-shape" style="bottom:-4%;inset-inline-start:-4%;width:260px" viewBox="0 0 200 200" aria-hidden="true">
+          <path fill="#DCEBF5" d="M44.9,-57.9C57.4,-49.2,66.3,-35.3,70.1,-20.1C73.9,-4.8,72.6,11.8,65.5,25.4C58.4,39,45.6,49.7,31.5,56.9C17.4,64.1,2.1,67.9,-13.9,66.4C-29.9,64.9,-46.5,58.1,-57.3,45.7C-68.1,33.3,-73,15.3,-71.6,-1.9C-70.2,-19.1,-62.4,-35.4,-50.4,-44.4C-38.4,-53.4,-22.1,-55,-6.1,-57.6C9.8,-60.2,32.4,-66.6,44.9,-57.9Z" transform="translate(100 100)"/>
+        </svg>
+
+        <figure class="hero-photo">
+          <i class="tape" style="--tp:var(--mint);top:-14px;inset-inline-start:-28px;transform:rotate(-42deg)"></i>
+          <i class="tape" style="--tp:var(--mustard);top:-14px;inset-inline-end:-28px;transform:rotate(42deg)"></i>
+          <img src="https://cdn.files.salla.network/homepage/1161127395/f8f80c0b-7046-4183-a952-f09a176a724b.webp" alt="تشكيلة من منتجاتنا اليدوية" loading="eager">
+          <figcaption>من قلب البازار — تشكيلة هذا الأسبوع ♥</figcaption>
+        </figure>
+
+        <div class="hero-logo-cut">
+          <i class="tape" style="--tp:var(--coral);top:-12px;inset-inline-start:24%;width:70px;transform:rotate(-6deg)"></i>
+          <img src="logo-final-kufi.png" alt="صنع بحب">
+        </div>
+
+        <div class="h-card c1"><span class="em">🕯️</span> شموع مسكوبة يدويًا</div>
+        <div class="h-card c2"><span class="em">🧶</span> كروشيه بغرزة حب</div>
+        <div class="h-card c3"><span class="em">🎁</span> تغليف هدايا مجاني</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- torn edge -->
+<svg class="torn" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+  <path fill="#FFFDF6" d="M0,38 C60,22 120,50 190,34 C260,18 310,46 390,32 C470,18 520,52 610,36 C700,20 760,48 850,30 C940,14 1000,44 1090,34 C1180,24 1240,50 1320,32 C1380,20 1410,40 1440,30 L1440,60 L0,60 Z"/>
+</svg>
+
+<!-- ======== categories ======== -->
+<section class="cats" id="cats">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">🎪 أجنحة البازار</span>
+      <h2 class="sec-title">تجوّلي بين الأركان</h2>
+      <p class="sec-sub">ستة أركان مقصوصة بعناية، وكل ركن يخبّئ حكاية صنعتها يد محبّة</p>
+    </div>
+    <div class="cat-grid">
+      <a href="#" class="cat rv" style="--cbg:var(--coral-soft);--r:-2deg">
+        <i class="tape mini-tape" style="--tp:var(--coral)"></i>
+        <span class="blobem">🕯️</span><h3>شموع وعطور</h3><span>٤٨ منتجًا</span>
+      </a>
+      <a href="#" class="cat rv" style="--cbg:var(--mint-soft);--r:1.5deg">
+        <i class="tape mini-tape" style="--tp:var(--mint)"></i>
+        <span class="blobem">🧶</span><h3>كروشيه</h3><span>٦٢ منتجًا</span>
+      </a>
+      <a href="#" class="cat rv" style="--cbg:var(--mustard-soft);--r:-1.5deg">
+        <i class="tape mini-tape" style="--tp:var(--mustard)"></i>
+        <span class="blobem">🏺</span><h3>فخار وخزف</h3><span>٣٥ منتجًا</span>
+      </a>
+      <a href="#" class="cat rv" style="--cbg:var(--sky-soft);--r:2deg">
+        <i class="tape mini-tape" style="--tp:var(--sky)"></i>
+        <span class="blobem">🧺</span><h3>خوص وسلال</h3><span>٢٧ منتجًا</span>
+      </a>
+      <a href="#" class="cat rv" style="--cbg:var(--rose-soft);--r:-2deg">
+        <i class="tape mini-tape" style="--tp:var(--rose)"></i>
+        <span class="blobem">🎨</span><h3>لوحات فنية</h3><span>٤١ منتجًا</span>
+      </a>
+      <a href="#" class="cat rv" style="--cbg:var(--coral-soft);--r:1deg">
+        <i class="tape mini-tape" style="--tp:var(--crimson)"></i>
+        <span class="blobem">🎁</span><h3>هدايا</h3><span>٥٤ منتجًا</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="heart-divider" aria-hidden="true"><i></i><b>♥</b><i></i></div>
+
+<!-- ======== latest products ======== -->
+<section class="prods" id="prods">
+  <div class="confetti" aria-hidden="true">
+    <i style="top:10%;inset-inline-start:4%;--s:1rem;--d:9s">💛</i>
+    <i style="top:70%;inset-inline-end:5%;--s:1.2rem;--d:7s">🩷</i>
+    <i style="top:40%;inset-inline-end:2%;--s:.8rem;--d:11s">🧡</i>
+  </div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">✨ وصل حديثًا</span>
+      <h2 class="sec-title">قطع طازجة من أيدي الحرفيات</h2>
+      <p class="sec-sub">أحدث ما أضافته صانعاتنا إلى رفوف البازار هذا الأسبوع</p>
+    </div>
+    <div class="prod-grid">
+      <article class="prod rv" style="--r:-1.5deg">
+        <i class="tape" style="--tp:var(--mint);top:-13px;inset-inline-start:32%;width:78px;transform:rotate(-4deg)"></i>
+        <span class="badge" style="--bg:var(--coral)">جديد ✨</span>
+        <div class="ph" style="--pbg:var(--coral-soft)"><span class="em">🕯️</span></div>
+        <div class="info">
+          <span class="maker">متجر سلمى</span>
+          <h3>شمعة الفانيلا والعنبر</h3>
+          <div class="price">٨٥ <small>ر.س</small></div>
+          <button class="add-btn" data-name="شمعة الفانيلا والعنبر">أضيفيها للسلة 🧺</button>
+        </div>
+      </article>
+      <article class="prod rv" style="--r:2deg">
+        <i class="tape" style="--tp:var(--mustard);top:-13px;inset-inline-start:32%;width:78px;transform:rotate(3deg)"></i>
+        <span class="badge" style="--bg:var(--crimson)">الأكثر مبيعًا ♥</span>
+        <div class="ph" style="--pbg:var(--mint-soft)"><span class="em">🧸</span></div>
+        <div class="info">
+          <span class="maker">دولي</span>
+          <h3>دبدوب كروشيه مصنوع يدويًا</h3>
+          <div class="price">١٢٠ <small>ر.س</small></div>
+          <button class="add-btn" data-name="دبدوب كروشيه">أضيفيها للسلة 🧺</button>
+        </div>
+      </article>
+      <article class="prod rv" style="--r:-2deg">
+        <i class="tape" style="--tp:var(--sky);top:-13px;inset-inline-start:32%;width:78px;transform:rotate(-3deg)"></i>
+        <span class="badge" style="--bg:var(--mustard);color:var(--crimson-deep)">خصم ١٥٪</span>
+        <div class="ph" style="--pbg:var(--mustard-soft)"><span class="em">🏺</span></div>
+        <div class="info">
+          <span class="maker">نور</span>
+          <h3>مزهرية فخار بلمسة تراثية</h3>
+          <div class="price">١٥٣ <small>ر.س</small><span class="old">١٨٠ ر.س</span></div>
+          <button class="add-btn" data-name="مزهرية فخار">أضيفيها للسلة 🧺</button>
+        </div>
+      </article>
+      <article class="prod rv" style="--r:1.5deg">
+        <i class="tape" style="--tp:var(--coral);top:-13px;inset-inline-start:32%;width:78px;transform:rotate(4deg)"></i>
+        <span class="badge" style="--bg:var(--sky)">قطعة واحدة 🎨</span>
+        <div class="ph" style="--pbg:var(--sky-soft)"><span class="em">🖼️</span></div>
+        <div class="info">
+          <span class="maker">لوحات البازار</span>
+          <h3>لوحة «حروف من نور» بالأكريليك</h3>
+          <div class="price">٢٤٠ <small>ر.س</small></div>
+          <button class="add-btn" data-name="لوحة حروف من نور">أضيفيها للسلة 🧺</button>
+        </div>
+      </article>
+    </div>
+    <div class="more rv">
+      <a class="btn btn-ghost" href="#">استكشفي كل القطع ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== brands ======== -->
+<section class="brands" id="brands">
+  <div class="confetti" aria-hidden="true">
+    <i style="top:16%;inset-inline-start:8%;--s:1.1rem;--d:8s">❤️</i>
+    <i style="top:74%;inset-inline-end:10%;--s:.9rem;--d:10s">🩷</i>
+    <i style="top:30%;inset-inline-end:4%;--s:1rem;--d:12s">💛</i>
+  </div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">🏬 عائلة البازار</span>
+      <h2 class="sec-title">متاجر تصنع بحب تحت سقفنا</h2>
+      <p class="sec-sub">ثلاث علامات صغيرة بقلوب كبيرة — كل متجر له لمسته وأسلوبه الخاص</p>
+    </div>
+    <div class="brand-grid">
+      <a href="#" class="bcard rv" style="--r:-2deg">
+        <i class="tape" style="--tp:var(--rose);top:-14px;inset-inline-start:34%;width:84px;transform:rotate(-3deg)"></i>
+        <img src="https://cdn.files.salla.network/brands/1161127395/7cb2db59-859a-45fa-9ef9-666d85cada9b_900x900.webp" alt="شعار متجر سلمى" loading="lazy">
+        <h3>متجر سلمى</h3>
+        <p>شموع وعطور منزلية تُسكب يدويًا بعطور تحاكي ذاكرة البيوت</p>
+        <span class="visit">زوري المتجر ←</span>
+      </a>
+      <a href="#" class="bcard rv" style="--r:1.5deg">
+        <i class="tape" style="--tp:var(--mint);top:-14px;inset-inline-start:34%;width:84px;transform:rotate(3deg)"></i>
+        <img src="https://cdn.salla.sa/RABaNP/PELESVNJk0Vbdv2AlMI6YMh174CjTr1QBondyjL2.png" alt="شعار دولي" loading="lazy">
+        <h3>دولي</h3>
+        <p>عالم الكروشيه الملوّن — دمى وإكسسوارات تُحاك غرزة بغرزة</p>
+        <span class="visit">زوري المتجر ←</span>
+      </a>
+      <a href="#" class="bcard rv" style="--r:-1.5deg">
+        <i class="tape" style="--tp:var(--mustard);top:-14px;inset-inline-start:34%;width:84px;transform:rotate(-4deg)"></i>
+        <img src="https://cdn.salla.sa/RABaNP/brands/2BsviGrAGVzhU1ygjTM9srAypnjAzMrAReDv0Fua.png" alt="شعار نور" loading="lazy">
+        <h3>نور</h3>
+        <p>فخار وخزف بروح عصرية وجذور تراثية من قلب المملكة</p>
+        <span class="visit">زوري المتجر ←</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="heart-divider" aria-hidden="true"><i></i><b>♥</b><i></i></div>
+
+<!-- ======== maker story ======== -->
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-art rv">
+        <div class="sp p1">🧶</div>
+        <div class="sp p2">🏺</div>
+        <div class="sp p3">🕯️</div>
+        <div class="sp p4">✂️</div>
+        <div class="story-quote">«كل غرزة أحيكها، أحيك معها دعوة لمن ستصلها القطعة»</div>
+      </div>
+      <div class="story-copy rv">
+        <span class="sec-kicker">📖 حكايتنا</span>
+        <h2>بدأنا بطاولة صغيرة في بازار حيّنا... واليوم نحن بيت لأكثر من مئة حرفية</h2>
+        <p>
+          «صنع بحب» لم تولد كمشروع تجاري، بل كحلم بسيط: أن تجد كل صانعة سعودية مكانًا
+          يليق بإبداعها. من شمعة سلمى الأولى إلى دمى دولي ومزهريات نور، جمعنا الحكايات
+          قطعةً قطعة كما تُجمع قصاصات الورق الملوّن في لوحة واحدة.
+        </p>
+        <p>
+          كل منتج يصلك موقّع باسم صانعته، مغلف بيد، ومعه بطاقة صغيرة تخبرك من صنعه ولماذا.
+        </p>
+        <ul class="story-points">
+          <li><span class="dot" style="background:var(--mint)">✔</span> نصنع بكميات صغيرة حتى تبقى كل قطعة مميزة</li>
+          <li><span class="dot" style="background:var(--mustard)">✔</span> ٨٠٪ من قيمة كل عملية شراء تذهب مباشرة للحرفية</li>
+          <li><span class="dot" style="background:var(--coral)">✔</span> خامات محلية وصديقة للبيئة قدر الإمكان</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- torn edge -->
+<svg class="torn" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+  <path fill="#FFFDF6" d="M0,34 C70,20 130,48 210,32 C290,16 350,44 430,30 C510,16 570,50 660,34 C750,18 810,46 900,28 C990,12 1050,42 1140,32 C1230,22 1290,48 1370,30 C1410,22 1430,36 1440,32 L1440,60 L0,60 Z"/>
+</svg>
+
+<!-- ======== features ======== -->
+<section class="feats">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">🌟 لماذا بازار الحب؟</span>
+      <h2 class="sec-title">أربعة وعود لا نحيد عنها</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat rv" style="--fbg:var(--mint-soft);--r:-1.5deg">
+        <span class="fi">🤲</span>
+        <h3>صناعة يدوية ١٠٠٪</h3>
+        <p>لا خطوط إنتاج ولا مصانع — أيدي حرفيات فقط، وقلوبهن معها</p>
+      </div>
+      <div class="feat rv" style="--fbg:var(--mustard-soft);--r:1.5deg">
+        <span class="fi">🚚</span>
+        <h3>شحن سريع وآمن</h3>
+        <p>تغليف مبطّن بعناية يوصل قطعتك لباب بيتك خلال ٢-٥ أيام</p>
+      </div>
+      <div class="feat rv" style="--fbg:var(--coral-soft);--r:-1deg">
+        <span class="fi">🎀</span>
+        <h3>تغليف هدايا مجاني</h3>
+        <p>بطاقة إهداء مكتوبة بخط اليد مع كل طلب هدية، بلا رسوم إضافية</p>
+      </div>
+      <div class="feat rv" style="--fbg:var(--sky-soft);--r:2deg">
+        <span class="fi">🇸🇦</span>
+        <h3>دعم للمواهب المحلية</h3>
+        <p>مع كل شراء تساهمين في نمو مشروع سعودي صغير وحلم كبير</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== newsletter ======== -->
+<section class="news" id="news">
+  <div class="confetti" aria-hidden="true">
+    <i style="top:14%;inset-inline-start:10%;--s:1.3rem;--d:8s">💌</i>
+    <i style="top:70%;inset-inline-end:12%;--s:1.1rem;--d:10s">🩷</i>
+    <i style="top:26%;inset-inline-end:6%;--s:.9rem;--d:12s">💛</i>
+    <i style="top:78%;inset-inline-start:5%;--s:1rem;--d:9s">❤️</i>
+  </div>
+  <div class="wrap">
+    <div class="news-card rv">
+      <i class="tape" style="--tp:var(--mint);top:-15px;inset-inline-start:12%;transform:rotate(-6deg)"></i>
+      <i class="tape" style="--tp:var(--coral);top:-15px;inset-inline-end:12%;transform:rotate(6deg)"></i>
+      <span class="disc">🎉 خصم ١٠٪ على طلبك الأول</span>
+      <h2>انضمي إلى بريد البازار</h2>
+      <p>رسالة لطيفة كل أسبوعين: قطع جديدة، حكايات صانعات، وعروض تخص المشتركات فقط</p>
+      <form class="news-form" id="newsForm" novalidate>
+        <input type="email" id="newsEmail" placeholder="بريدك الإلكتروني الجميل ✉️" aria-label="البريد الإلكتروني" required>
+        <button type="submit" class="btn btn-main">اشتركي ♥</button>
+      </form>
+      <div class="news-msg" id="newsMsg" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== footer ======== -->
+<footer>
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img src="logo-final-kufi.png" alt="شعار صنع بحب">
+        <p>بازار الحب — سوق سعودي للمنتجات اليدوية، حيث تلتقي أنامل الحرفيات بقلوب محبّي القطع الفريدة.</p>
+        <div class="ft-social">
+          <a href="#" aria-label="انستقرام">📸</a>
+          <a href="#" aria-label="تيك توك">🎵</a>
+          <a href="#" aria-label="إكس">𝕏</a>
+          <a href="#" aria-label="واتساب">💬</a>
+        </div>
+      </div>
+      <div>
+        <h4>الأقسام</h4>
+        <ul class="ft-links">
+          <li><a href="#cats">♥ شموع وعطور</a></li>
+          <li><a href="#cats">♥ كروشيه</a></li>
+          <li><a href="#cats">♥ فخار وخزف</a></li>
+          <li><a href="#cats">♥ خوص وسلال</a></li>
+          <li><a href="#cats">♥ لوحات فنية</a></li>
+          <li><a href="#cats">♥ هدايا</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>متاجرنا</h4>
+        <ul class="ft-links">
+          <li><a href="#brands">♥ متجر سلمى</a></li>
+          <li><a href="#brands">♥ دولي</a></li>
+          <li><a href="#brands">♥ نور</a></li>
+          <li><a href="#story">♥ انضمي كصانعة</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>يهمّك</h4>
+        <ul class="ft-links">
+          <li><a href="#">♥ الشحن والتوصيل</a></li>
+          <li><a href="#">♥ سياسة الاستبدال</a></li>
+          <li><a href="#">♥ الأسئلة الشائعة</a></li>
+          <li><a href="#">♥ تواصلي معنا</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© ٢٠٢٦ صنع بحب · 9n3b7b.com — جميع الحقوق محفوظة</span>
+      <span>صُنع هذا الموقع أيضًا <span class="luv">بحب ♥</span> في السعودية</span>
+    </div>
+  </div>
+</footer>
+
+<!-- toast -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span>♥</span><span id="toastTxt"></span>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* duplicate marquee content for seamless loop */
+  var marquee=document.getElementById('marquee');
+  marquee.innerHTML+=marquee.innerHTML;
+
+  /* mobile menu */
+  var burger=document.getElementById('burger'),mNav=document.getElementById('mNav');
+  burger.addEventListener('click',function(){
+    var open=mNav.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open);
+    burger.textContent=open?'✕':'☰';
+  });
+  mNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      mNav.classList.remove('open');burger.textContent='☰';
+      burger.setAttribute('aria-expanded','false');
+    });
+  });
+
+  /* cart + toast */
+  var count=0,
+      cartCount=document.getElementById('cartCount'),
+      toast=document.getElementById('toast'),
+      toastTxt=document.getElementById('toastTxt'),
+      toastTimer=null;
+  var arDigits=function(n){return String(n).replace(/\d/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d];});};
+
+  function showToast(msg){
+    toastTxt.textContent=msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(function(){toast.classList.remove('show');},2600);
+  }
+
+  document.querySelectorAll('.add-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      count++;
+      cartCount.textContent=arDigits(count);
+      cartCount.classList.add('bump');
+      setTimeout(function(){cartCount.classList.remove('bump');},320);
+      showToast('أضفنا «'+btn.dataset.name+'» إلى سلتك بحب');
+    });
+  });
+
+  document.getElementById('cartBtn').addEventListener('click',function(){
+    showToast(count?('في سلتك '+arDigits(count)+' قطع مصنوعة بحب 🧺'):'سلتك فارغة... البازار بانتظارك ♥');
+  });
+
+  /* newsletter */
+  var form=document.getElementById('newsForm'),
+      email=document.getElementById('newsEmail'),
+      msg=document.getElementById('newsMsg');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=email.value.trim();
+    if(!v||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+      msg.textContent='أدخلي بريدًا إلكترونيًا صحيحًا حتى يصلك الحب 💌';
+      msg.style.color='var(--coral)';
+      return;
+    }
+    msg.textContent='أهلًا بك في عائلة البازار! كود خصمك: LOVE10 🎉';
+    msg.style.color='var(--crimson)';
+    email.value='';
+    showToast('تم الاشتراك — خصم ١٠٪ في طريقه إليك ♥');
+  });
+
+  /* scroll reveal */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+      });
+    },{threshold:.12});
+    document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in');});
+  }
+})();
+</script>
+</body>
+</html>
